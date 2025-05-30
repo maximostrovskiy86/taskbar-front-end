@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const ButtonContainer = styled.button`
     // padding-top:${props => props.theme.spacing[2]}px;
     // padding-bottom:${props => props.theme.spacing[2]}px;
-	
+	width: 52px;
+	height: 52px;
 	
 	display: flex;
 	justify-content: center;
