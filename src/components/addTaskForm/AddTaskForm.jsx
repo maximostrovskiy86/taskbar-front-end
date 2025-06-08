@@ -56,9 +56,9 @@ const AddTaskForm = ({date}) => {
 		// const customDate = moment(date).format("YYYY-MM-DD");
 		
 		dispatch(tasksOperations.addTask({
-			taskName: taskName,
+			title: taskName,
 			category: category,
-			complexity: complexity
+			level: complexity
 		}))
 		
 		setTaskName("");

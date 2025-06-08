@@ -11,10 +11,12 @@ import {useEffect} from "react";
 import tasksOperations from "../../redux/tasks/tasksOperations";
 import {FaPlus} from "react-icons/fa";
 import {IconContext} from "react-icons";
+import 	CardList from "../../components/cardLists";
 
 
 const Dashboard = () => {
 	const [showModal, setShowModal] = useState(false);
+	const [isCreateFormShown, setIsCreateFormShown] = useState(false);
 	
 	const dispatch = useDispatch();
 	const tasks = useSelector(getAllTasks);
@@ -27,13 +29,17 @@ const Dashboard = () => {
 		setShowModal(!showModal);
 	}
 	
+	const createEditTask = () => {
+		setIsCreateFormShown(true)
+	}
+	
 	console.log("tasks", tasks);
 	return (
 		<DashBoardContainer>
 			<Container>
-				<CardLists tasks={tasks}/>
+				<CardLists tasks={tasks} isCreateFormShown={isCreateFormShown}/>
 				<IconContext.Provider value={{className: "add-task-button", size: "0.75em"}}>
-					<Button type="button" onClick={toggleModal}>
+					<Button type="button" onClick={createEditTask}>
 						<FaPlus/>
 					</Button>
 				</IconContext.Provider>

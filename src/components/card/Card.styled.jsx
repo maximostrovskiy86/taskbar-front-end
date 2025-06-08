@@ -36,6 +36,7 @@ export const CardContainer = styled.div`
 			transform: translateY(-15%);
 		}
     }
+	
     
     .main-card {
 		font-size: 20px;
@@ -63,5 +64,33 @@ export const CardContainer = styled.div`
         background: #D3F6CE;
         border-top-right-radius: 50px;
         border-bottom-right-radius: 50px;
+    }
+`;
+
+export const CardInput = styled.div`
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    input {
+		padding: 3px;
+        border: none;
+        outline: none;
+        border-bottom: 1px solid ${({theme}) => theme.colors.secondary};
+		caret-color: ${({ theme }) => theme.colors.secondary};: ;
+        
+        &:focus {
+            //background-color: ${({theme}) => theme.colors.gray};
+        }
+    }
+    
+    
+    label {
+		padding-bottom: 5px;
+        font-weight: ${props => props.theme.fontWeights.normal};
+        text-transform: uppercase;
+        font-size: ${props => props.theme.fontSizes.sm};
+        color: ${props => props.theme.colors.gray};
     }
 `;
