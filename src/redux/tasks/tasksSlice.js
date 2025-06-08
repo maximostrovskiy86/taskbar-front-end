@@ -5,13 +5,13 @@ import tasksOperations from "./tasksOperations";
 
 
 const initialState = {
-	data: null,
+	data: [],
 	isLoading: false,
 	error: null,
 }
 
 
-const userSlice = createSlice({
+const taskSlice = createSlice({
 	name: "tasks",
 	initialState,
 	extraReducers: builder => {
@@ -29,25 +29,22 @@ const userSlice = createSlice({
 				state.error = action.payload;
 				state.isLoading = false;
 			})
+			
+			
+			.addCase(tasksOperations.addTask.pending, (state, _) => {
+				state.isLoading = true;
+			})
+			.addCase(tasksOperations.addTask.fulfilled, (state, action) => {
+				console.log("addTask", action);
+				state.data = [...state.data, action.payload.data.task];
+				state.isLoading = false;
+				state.error = null;
+			})
+			.addCase(tasksOperations.addTask.rejected, (state, action) => {
+				state.error = action.payload;
+				state.isLoading = false;
+			})
 		
-		
-		// .addCase(getCurrentUserInfo.pending, (state, _) => {
-		// 	state.isLoading = true;
-		// })
-		// .addCase(getCurrentUserInfo.fulfilled, (state, action) => {
-		// 	state.day = action.payload.data.days.find(day => state.date === day.date);
-		// 	state.username = action.payload.data.username;
-		// 	state.id = action.payload.data.id;
-		// 	state.userData = action.payload.data.userData;
-		// 	state.isLoading = false;
-		// 	state.error = null;
-		// })
-		// .addCase(getCurrentUserInfo.rejected, (state, action) => {
-		// 	state.error = action.payload;
-		// 	state.isLoading = false;
-		// })
-		//
-		//
 		// .addCase(addUserProductByDay.pending, (state, _) => {
 		// 	state.isLoading = true;
 		// })
@@ -65,4 +62,4 @@ const userSlice = createSlice({
 	}
 })
 
-export const tasksReducer = userSlice.reducer;
+export const tasksReducer = taskSlice.reducer;

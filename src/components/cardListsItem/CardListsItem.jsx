@@ -5,7 +5,7 @@ import {ReactComponent as Star} from "../../images/star_blue.svg";
 
 const CardListsItem = ({task}) => {
 	const {title, level, date, category} = task;
-	console.log("task", task)
+	// console.log("task", task)
 	
 	return (
 		<CardContainer className="card">

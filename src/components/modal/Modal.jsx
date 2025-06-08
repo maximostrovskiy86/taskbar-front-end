@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import {BackDrop, ModalContent} from "./Modal.styled";
 import {createPortal} from "react-dom";
-import IconButton from "../iconButton";
-import {ReactComponent as GoBack} from "../../images/modal/cross-arrow.svg";
+import {IoMdClose} from "react-icons/io";
+// import {ReactComponent as GoBack} from "../../images/modal/cross-arrow.svg";
 
 
 const modalRoot = document.querySelector('#modal-root');
@@ -37,9 +37,8 @@ const Modal = ({toggleModal, children}) => {
 		<BackDrop onClick={onOverlayClose}>
 			<ModalContent className="modal">
 				<div className="modal-header">
-					<IconButton toggleModal={toggleModal} aria-label="Go Back">
-						<GoBack width={17} height={10}/>
-					</IconButton>
+					Create task
+					<IoMdClose onClick={toggleModal} fill="#ffffff" size={25} style={{cursor: "pointer"}}/>
 				</div>
 				{children}
 			</ModalContent>
