@@ -7,15 +7,17 @@ export const CreateEditContainer = styled(CardContainer)`
 
 export const CreateEditHeaderCardContainer = styled(CardHeader)`
     .level-box {
+		width: 100px;
         position: relative;
-        padding-right: 20px;
+        padding-right: 15px;
         display: flex;
         align-items: center;
+        cursor: pointer;
         
         &:after {
             content: '';
             position: absolute;
-            right: 8px;
+            right: 2px;
             top: 9px;
             border: 6px solid transparent;
             border-top: 6px solid ${({theme}) => theme.colors.secondary};

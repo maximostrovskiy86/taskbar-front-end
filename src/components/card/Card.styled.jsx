@@ -56,7 +56,6 @@ export const CardHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 15px;
     font-weight: 400;
     color: ${({theme}) => theme.colors.gray};
 `;

@@ -4,27 +4,6 @@ export const OptionsPickerContainer = styled.div`
     position: absolute;
     top: 25px;
     left: 0;
-	
-    .popup-level-enter {
-        opacity: 0;
-        transform: scale(0.7);
-    }
-    
-    .popup-level-enter-active {
-        opacity: 1;
-        transform: translateX(0);
-        transition: opacity 400ms, transform 400ms;
-    }
-    
-    .popup-level-exit {
-        opacity: 1;
-    }
-    
-    .popup-level-exit-active {
-        opacity: 0;
-        transform: scale(0.7);
-        transition: opacity 400ms, transform 400ms;
-    }
     
     .level-list {
         li {
@@ -49,5 +28,26 @@ export const OptionsPickerContainer = styled.div`
         li + li {
             margin-top: 3px;
         }
+    }
+    
+    .popup-level-enter {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+    
+    .popup-level-enter-active {
+        opacity: 1;
+        transform: translateX(0);
+        transition: opacity 400ms, transform 400ms;
+    }
+    
+    .popup-level-exit {
+        opacity: 1;
+    }
+    
+    .popup-level-exit-active {
+        opacity: 0;
+        transform: scale(0.7);
+        transition: opacity 400ms, transform 400ms;
     }
 `;

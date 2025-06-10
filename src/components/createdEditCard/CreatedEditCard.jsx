@@ -77,9 +77,10 @@ const CreateEditCard = ({difficultyProp = "Normal",}) => {
 		<>
 			<CreateEditContainer onSubmit={onSubmit}>
 				<CreateEditHeaderCardContainer>
-					<div className={isShowModal ? "level-box active" : "level-box"}>
+					<div className={isShowModal ? "level-box active" : "level-box"}
+						 onClick={() => setIsShowModal(!isShowModal)}>
 						<span style={{backgroundColor: `${levelDate.color}`}} className="color-selected-level"></span>
-						<button onClick={() => setIsShowModal(!isShowModal)}>{levelDate.level}</button>
+						<button>{levelDate.level}</button>
 						<OptionsPicker isShowModal={isShowModal} onChoiceLevel={onChoiceLevel}
 									   toggleModal={toggleModal}/>
 					</div>

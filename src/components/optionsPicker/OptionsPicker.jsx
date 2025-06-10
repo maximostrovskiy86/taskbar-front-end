@@ -18,7 +18,7 @@ const OptionsPicker = ({toggleModal, onChoiceLevel, isShowModal}) => {
 			<CSSTransition
 				in={isShowModal}
 				nodeRef={nodeRef}
-				timeout={500}
+				timeout={250}
 				classNames="popup-level"
 				unmountOnExit
 			>
