@@ -1,29 +1,44 @@
-import {useState} from "react";
+import {useState, useRef} from "react";
 import {useDispatch} from "react-redux";
-import Card from "../card";
-import {CardContainer, CardInput} from "../card/Card.styled";
+import {
+	CreateEditContainer,
+	CardInput,
+	FooterEditCardContainer,
+	CreateEditHeaderCardContainer,
+} from "./CreatedEditCard.styled";
+import OptionsPicker from "../optionsPicker";
+import DateCalendar from "../dateCalendar";
+import {ChoiceCategory} from "../card/Card.styled";
 import {ReactComponent as Star} from "../../images/star_blue.svg";
+import {ReactComponent as CancelCross} from "../../images/cancele-cross.svg";
 import addTask from "../../redux/tasks/tasksOperations"
+import {CSSTransition} from "react-transition-group";
 
 
-const CreateEditCard = () => {
-	const levelArray = ["Easy", "Normal", "Hard"];
-	
-	const [level, setLevel] = useState('');
+
+const CreateEditCard = ({difficultyProp = "Normal",}) => {
+	const categoryArray = ["Stuff", "Family", "Learning", "Family", "Leisure", "Work"];
+	const [date, setDate] = useState(new Date());
 	const [title, setTitle] = useState('');
+	const [category, setCategory] = useState('');
+	const [isShowModal, setIsShowModal] = useState(false);
+	const [levelDate, setLevelDate] = useState({level: "Normal", color: "#24D40C"},);
 	
 	const dispatch = useDispatch();
-	
+	const nodeRef = useRef(null);
 	
 	const handleChangeCardForm = (e) => {
 		const {value, name} = e.target;
 		
 		switch (name) {
-			case "level":
-				setLevel(value);
-				break;
+			// case "level":
+			// 	setLevel(value);
+			// 	break;
 			case "title":
 				setTitle(value);
+				break;
+			case "category":
+				setCategory(value);
 				break;
 			default:
 				return;
@@ -34,32 +49,62 @@ const CreateEditCard = () => {
 		e.preventDefault();
 		
 		const dataTask = {
-			level,
-			title
+			level: levelDate.level,
+			title,
+			category,
+			date,
 		}
 		
 		dispatch(addTask(dataTask));
 		
 	}
 	
+	const onChoiceLevel = (item) => {
+		setIsShowModal(false);
+		setLevelDate({
+			...levelDate,
+			level: item.level,
+			color: item.color,
+		})
+		console.log('item', item);
+	}
+	
+	const toggleModal = () => {
+		setIsShowModal(!isShowModal);
+	}
+	
 	return (
-		<CardContainer>
-			<form onSubmit={onSubmit}>
-				<div className="header-card">
-					<select onClick={handleChangeCardForm} name="level">
-						{levelArray.map((item) => (
-							<option key={item} value={item}>{item}</option>
-						))}
-					</select>
+		<>
+			<CreateEditContainer onSubmit={onSubmit}>
+				<CreateEditHeaderCardContainer>
+					<div className={isShowModal ? "level-box active" : "level-box"}>
+						<span style={{backgroundColor: `${levelDate.color}`}} className="color-selected-level"></span>
+						<button onClick={() => setIsShowModal(!isShowModal)}>{levelDate.level}</button>
+						<OptionsPicker isShowModal={isShowModal} onChoiceLevel={onChoiceLevel}
+									   toggleModal={toggleModal}/>
+					</div>
 					<Star/>
-				</div>
+				</CreateEditHeaderCardContainer>
 				<CardInput>
 					<label htmlFor="enter-title">Create a new quest</label>
 					<input type="text" id="enter-title" name="title" required minLength="3" autoFocus/>
 				</CardInput>
-			</form>
-			<h1>NEw</h1>
-		</CardContainer>
+				<DateCalendar selectDate={setDate} elemDate={date}/>
+				<FooterEditCardContainer>
+					<ChoiceCategory onClick={handleChangeCardForm} className="category">
+						<select name="category">
+							{categoryArray.map((item) => (
+								<option key={item} value={item}>{item}</option>
+							))}
+						</select>
+					</ChoiceCategory>
+					<div className="make-card">
+						<button type="button" className="cancel-task"><CancelCross/></button>
+						<button type="submit" className="create-task">Create</button>
+					</div>
+				</FooterEditCardContainer>
+			</CreateEditContainer>
+		</>
 	)
 }
 

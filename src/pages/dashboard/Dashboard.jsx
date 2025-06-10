@@ -11,7 +11,7 @@ import {useEffect} from "react";
 import tasksOperations from "../../redux/tasks/tasksOperations";
 import {FaPlus} from "react-icons/fa";
 import {IconContext} from "react-icons";
-import 	CardList from "../../components/cardLists";
+import CardList from "../../components/cardLists";
 
 
 const Dashboard = () => {
@@ -38,11 +38,14 @@ const Dashboard = () => {
 		<DashBoardContainer>
 			<Container>
 				<CardLists tasks={tasks} isCreateFormShown={isCreateFormShown}/>
-				<IconContext.Provider value={{className: "add-task-button", size: "0.75em"}}>
-					<Button type="button" onClick={createEditTask}>
-						<FaPlus/>
-					</Button>
-				</IconContext.Provider>
+				<div className="add-task-button">
+					<IconContext.Provider value={{className: "task-button", size: "0.75em"}}>
+						<Button type="button" onClick={createEditTask}>
+							<FaPlus/>
+						</Button>
+					</IconContext.Provider>
+				</div>
+			
 			</Container>
 			{showModal &&
 				<Modal toggleModal={toggleModal}>

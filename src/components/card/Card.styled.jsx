@@ -1,96 +1,62 @@
 import styled from "styled-components";
+import color from "../../theme"
 
 
 export const CardContainer = styled.div`
     width: 260px;
     height: 260px;
     margin-bottom: 15px;
-    padding-top: 15px;
-    padding-bottom: 25px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-	
-	color: ${({ theme }) => theme.colors.text};
-	
+    
+    color: ${({theme}) => theme.colors.text};
+    
     border-radius: 15px;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     
-    .header-card {
-		position: relative;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-right: 15px;
-        padding-left: 30px;
-        font-weight: 400;
-        color: ${({ theme }) => theme.colors.gray};
-		&:before {
-			content: "";
-			position: absolute;
-			left: 15px;
-			width: 10px;
-			height: 10px;
-			border-radius: 50%;
-			background: red;
-			transform: translateY(-15%);
-		}
-    }
-	
-    
     .main-card {
-		font-size: 20px;
-		font-weight: 700;
+        font-size: 20px;
+        font-weight: 700;
         text-align: center;
-		.date {
-			padding-right: 7px;
-			font-size: 14px;
-            color: ${({ theme }) => theme.colors.gray};
+        
+        .date {
+            padding-right: 7px;
+            font-size: 14px;
+            color: ${({theme}) => theme.colors.gray};
         }
-    }
-    
-    
-    .category {
-        width: 120px;
-        height: 35px;
-        display: flex;
-        align-items: center;
-        padding-left: 15px;
-		
-		font-size: 14px;
-		font-weight: 400;
-		
-		
-        background: #D3F6CE;
-        border-top-right-radius: 50px;
-        border-bottom-right-radius: 50px;
     }
 `;
 
-export const CardInput = styled.div`
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    input {
-		padding: 3px;
+export const ChoiceCategory = styled.div`
+    select {
+        position: relative;
+        width: 110px;
+        height: 35px;
+        padding-left: 15px;
+        margin-left: -15px;
+        display: flex;
+        align-items: center;
+        
+        font-size: 14px;
+        font-weight: 400;
+        text-transform: uppercase;
+        
+        background: #D3F6CE;
+        border-top-right-radius: 50px;
+        border-bottom-right-radius: 50px;
         border: none;
         outline: none;
-        border-bottom: 1px solid ${({theme}) => theme.colors.secondary};
-		caret-color: ${({ theme }) => theme.colors.secondary};: ;
-        
-        &:focus {
-            //background-color: ${({theme}) => theme.colors.gray};
-        }
+        cursor: pointer;
     }
-    
-    
-    label {
-		padding-bottom: 5px;
-        font-weight: ${props => props.theme.fontWeights.normal};
-        text-transform: uppercase;
-        font-size: ${props => props.theme.fontSizes.sm};
-        color: ${props => props.theme.colors.gray};
-    }
+`;
+
+export const CardHeader = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 15px;
+    font-weight: 400;
+    color: ${({theme}) => theme.colors.gray};
 `;

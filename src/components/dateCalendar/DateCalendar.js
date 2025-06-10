@@ -1,10 +1,10 @@
 import React from "react";
 import DatePicker from "react-datepicker";
-import {DiaryDateCalendarContainer} from "./DiaryDateСalendar.styled"
+import {DiaryDateCalendarContainer} from "./DateCalendar.styled"
 import {ReactComponent as CalendarLogo} from "../../images/calendar.svg";
 import "react-datepicker/dist/react-datepicker.css";
 
-const DiaryDateCalendar = ({selectDate, elemDate}) => {
+const DateCalendar = ({selectDate, elemDate}) => {
     return (
         <DiaryDateCalendarContainer>
             <>
@@ -20,4 +20,4 @@ const DiaryDateCalendar = ({selectDate, elemDate}) => {
     );
 };
 
-export default DiaryDateCalendar;
+export default DateCalendar;

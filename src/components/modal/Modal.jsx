@@ -2,8 +2,6 @@ import React, {useEffect} from 'react';
 import {BackDrop, ModalContent} from "./Modal.styled";
 import {createPortal} from "react-dom";
 import {IoMdClose} from "react-icons/io";
-// import {ReactComponent as GoBack} from "../../images/modal/cross-arrow.svg";
-
 
 const modalRoot = document.querySelector('#modal-root');
 
