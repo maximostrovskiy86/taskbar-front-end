@@ -7,7 +7,7 @@ export const CreateEditContainer = styled(CardContainer)`
 
 export const CreateEditHeaderCardContainer = styled(CardHeader)`
     .level-box {
-		width: 100px;
+        width: 100px;
         position: relative;
         padding-right: 15px;
         display: flex;
@@ -49,28 +49,6 @@ export const CreateEditHeaderCardContainer = styled(CardHeader)`
             transition: transform 350ms cubic-bezier(0.4, 0, 0.2, 1);
         }
     }
-    
-    .alert-enter {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    
-    .alert-enter-active {
-        opacity: 1;
-        transform: translateX(0);
-        transition: opacity 300ms, transform 300ms;
-    }
-    
-    .alert-exit {
-        opacity: 1;
-    }
-    
-    .alert-exit-active {
-        opacity: 0;
-        transform: scale(0.9);
-        transition: opacity 300ms, transform 300ms;
-    }
-
 `;
 
 export const CardInput = styled.div`
@@ -99,49 +77,43 @@ export const CardInput = styled.div`
     }
 `;
 
+export const ConfirmedCreateDeleteTask = styled.div`
+    display: flex;
+    align-items: center;
+    
+    .cancel-task {
+        transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+    
+    .create-task {
+        position: relative;
+        text-transform: uppercase;
+        font-size: ${({theme}) => theme.fontSizes.md};;
+        color: ${({theme}) => theme.colors.secondary};
+        transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        
+        &:hover {
+            color: ${({theme}) => theme.colors.gray};
+        }
+        
+        &:before {
+            content: '|';
+            position: absolute;
+            width: 2px;
+            height: 25px;
+            left: -1px;
+            color: ${({theme}) => theme.colors.gray};
+        }
+    }
+`;
+
 
 export const FooterEditCardContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
-    .make-card button {
-        background: none;
-        border: none;
-        outline: none;
-        cursor: pointer;
-    }
-    
-    .make-card {
-		display: flex;
-		align-items: center;
-        .cancel-task {
-            transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
-            
-            &:hover {
-                transform: scale(1.1);
-            }
-        }
-        
-        .create-task {
-            position: relative;
-            text-transform: uppercase;
-            font-size: ${({theme}) => theme.fontSizes.md};;
-            color: ${({theme}) => theme.colors.secondary};
-            transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-            
-            &:hover {
-                color: ${({theme}) => theme.colors.gray};
-            }
-            
-            &:before {
-                content: '|';
-                position: absolute;
-                width: 2px;
-                height: 12px;
-                left: -1px;
-                color: ${({theme}) => theme.colors.gray};
-            }
-        }
-    }
 `;

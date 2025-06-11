@@ -4,7 +4,7 @@ import {
 	CreateEditContainer,
 	CardInput,
 	FooterEditCardContainer,
-	CreateEditHeaderCardContainer,
+	CreateEditHeaderCardContainer, ConfirmedCreateDeleteTask,
 } from "./CreatedEditCard.styled";
 import OptionsPicker from "../optionsPicker";
 import DateCalendar from "../dateCalendar";
@@ -13,6 +13,7 @@ import {ReactComponent as Star} from "../../images/star_blue.svg";
 import {ReactComponent as CancelCross} from "../../images/cancele-cross.svg";
 import addTask from "../../redux/tasks/tasksOperations"
 import {CSSTransition} from "react-transition-group";
+import Button from "../button";
 
 
 
@@ -60,13 +61,16 @@ const CreateEditCard = ({difficultyProp = "Normal",}) => {
 	}
 	
 	const onChoiceLevel = (item) => {
-		setIsShowModal(false);
 		setLevelDate({
 			...levelDate,
 			level: item.level,
 			color: item.color,
 		})
+		
+		setIsShowModal(false);
+		
 		console.log('item', item);
+		console.log('isSHOWMODAL', isShowModal);
 	}
 	
 	const toggleModal = () => {
@@ -94,15 +98,15 @@ const CreateEditCard = ({difficultyProp = "Normal",}) => {
 				<FooterEditCardContainer>
 					<ChoiceCategory onClick={handleChangeCardForm} className="category">
 						<select name="category">
-							{categoryArray.map((item) => (
-								<option key={item} value={item}>{item}</option>
+							{categoryArray.map((item, index) => (
+								<option key={index} value={item}>{item}</option>
 							))}
 						</select>
 					</ChoiceCategory>
-					<div className="make-card">
-						<button type="button" className="cancel-task"><CancelCross/></button>
-						<button type="submit" className="create-task">Create</button>
-					</div>
+					<ConfirmedCreateDeleteTask>
+						<Button	 type="button" className="cancel-task"><CancelCross/></Button>
+						<Button	 type="submit" className="create-task">Create</Button>
+					</ConfirmedCreateDeleteTask>
 				</FooterEditCardContainer>
 			</CreateEditContainer>
 		</>

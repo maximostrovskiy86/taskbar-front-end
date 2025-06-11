@@ -31,7 +31,7 @@ export const OptionsPickerContainer = styled.div`
     }
     
     .popup-level-enter {
-        opacity: 0;
+        opacity: 0.5;
         transform: scale(0.7);
     }
     
