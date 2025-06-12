@@ -4,7 +4,6 @@ import Dashboard from "../../pages/dashboard/Dashboard";
 import Landing from "../../pages/landing";
 import {getIsLoggedIn} from "../../redux/auth/authSelectors";
 
-
 function App() {
 
 	const iLoggedIn = useSelector(getIsLoggedIn)

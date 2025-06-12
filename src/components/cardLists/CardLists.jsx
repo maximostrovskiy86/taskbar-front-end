@@ -1,11 +1,18 @@
-import CardListsItem from "../cardListsItem";
+import Card from "../card";
+import CreateEditCard from "../createdEditCard";
 
 
-const CardLists = ({tasks}) => {
+const CardLists = ({isCreateFormShown = false, tasks}) => {
+	
 	return (
 		<div>
+			{isCreateFormShown && (
+				<div className="cardListItem">
+					<CreateEditCard/>
+				</div>
+			)}
 			{tasks && tasks.map((item, index) => {
-				return <CardListsItem key={item.id} task={item}/>
+				return <Card key={item.id} task={item}/>
 			})}
 		</div>
 	)

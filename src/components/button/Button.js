@@ -1,9 +1,9 @@
 import React from "react";
-import { ButtonContainer } from "./Button.styled";
+import {ButtonContainer} from "./Button.styled";
 
-const Button = ({type="submit", onClick, children}) => {
+const Button = ({type = "submit", onClick, children, className = "", bg = "", isCategoryChoice = false}) => {
 	return (
-		<ButtonContainer  type={type} onClick={onClick}>
+		<ButtonContainer className={className} bg={bg} type={type} onClick={onClick} isCategory={isCategoryChoice}>
 			{children}
 		</ButtonContainer>
 	);
