@@ -1,7 +1,10 @@
 import {PopUpPickerContent, BackDrop} from "./PopUpPicker.styled";
 import React, {useEffect} from "react";
+import {createPortal} from "react-dom";
 
-const PopUpPicker = ({children, toggleModal, ref}) => {
+const popupRoot = document.querySelector('#popup-root');
+
+const PopUpPicker = ({children, onClose}) => {
 	useEffect(() => {
 		window.addEventListener("keydown", onCLoseModal);
 		const body = document.querySelector("body");
@@ -16,20 +19,20 @@ const PopUpPicker = ({children, toggleModal, ref}) => {
 	
 	const onCLoseModal = (e) => {
 		if (e.code === 'Escape' || e.code === 'Enter') {
-			toggleModal();
+			onClose();
 		}
 	}
 	
 	const onOverlayClose = (e) => {
 		if (e.currentTarget === e.target) {
-			toggleModal();
+			onClose();
 		}
 	}
 	
 	return (
 		<>
-			<BackDrop onClick={onOverlayClose}/>
-			<PopUpPickerContent ref={ref}>
+		<BackDrop onClick={onOverlayClose} />
+			<PopUpPickerContent>
 				{children}
 			</PopUpPickerContent>
 		</>

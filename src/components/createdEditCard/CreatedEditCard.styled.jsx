@@ -6,23 +6,7 @@ export const CreateEditContainer = styled(CardContainer)`
 `;
 
 export const CreateEditHeaderCardContainer = styled(CardHeader)`
-    .level-box {
-        width: 100px;
-        position: relative;
-        padding-right: 15px;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        
-        &:after {
-            content: '';
-            position: absolute;
-            right: 2px;
-            top: 9px;
-            border: 6px solid transparent;
-            border-top: 6px solid ${({theme}) => theme.colors.secondary};
-        }
-        
+
         .color-selected-level {
             display: inline-block;
             width: 12px;
@@ -30,25 +14,6 @@ export const CreateEditHeaderCardContainer = styled(CardHeader)`
             margin-right: 2px;
             border-radius: 50%;
         }
-        
-        button {
-            font-size: ${({theme}) => theme.fontSizes.md};
-            color: ${({theme}) => theme.colors.gray};
-            text-transform: capitalize;
-            border: none;
-            outline: none;
-            background: none;
-            cursor: pointer;
-        }
-    }
-    
-    .level-box.active {
-        &:after {
-            top: 3px;
-            transform: rotate(180deg);
-            transition: transform 350ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-    }
 `;
 
 export const CardInput = styled.div`
@@ -63,10 +28,6 @@ export const CardInput = styled.div`
         outline: none;
         border-bottom: 1px solid ${({theme}) => theme.colors.secondary};
         caret-color: ${({theme}) => theme.colors.secondary};:;
-        
-        &:focus {
-                //background-color: ${({theme}) => theme.colors.gray};
-        }
     }
     
     label {

@@ -8,6 +8,8 @@ export const theme = {
 		gray: '#B9C3C8',
 		buttonBg: '#FF851C',
 		white: '#FFFFFF',
+		green: "#24D40C",
+		red: "#DB0837"
 	},
 	media: {
 		extraLarge: '(max-width: 1140px)',
