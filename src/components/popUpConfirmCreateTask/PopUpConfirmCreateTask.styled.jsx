@@ -1,4 +1,10 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
+
+const centeredElement = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
 
 export const PopUpConfirmBackDrop = styled.div`
     position: absolute;
@@ -6,9 +12,7 @@ export const PopUpConfirmBackDrop = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	${centeredElement};
     background-color: rgba(0, 0, 0, 0.15);
     z-index: 10;
 	
@@ -36,20 +40,13 @@ export const PopUpConfirmBackDrop = styled.div`
 
 export const PopUpContent = styled.div`
     position: absolute;
-    left: 50%;
-    top: 50%;
-	display: flex;
+    ${centeredElement};
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	
     height: 50%;
     width: 80%;
 
     background-color: #ffffff;
     //opacity: 0;
     //visibility: hidden;
-    // border: 2px solid ${p => p.theme.colors.primary};
 	border-radius: 10px;
-    transform: translate(-50%, -50%);
 `;

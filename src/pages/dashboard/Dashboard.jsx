@@ -30,14 +30,14 @@ const Dashboard = () => {
 	}
 	
 	const createEditTask = () => {
-		setIsCreateFormShown(true)
+		setIsCreateFormShown(!isCreateFormShown)
 	}
 	
 	console.log("tasks", tasks);
 	return (
 		<DashBoardContainer>
 			<Container>
-				<CardLists tasks={tasks} isCreateFormShown={isCreateFormShown}/>
+				<CardLists tasks={tasks} isCreateFormShown={isCreateFormShown} toggleModal={createEditTask}/>
 				<div className="add-task-button">
 					<IconContext.Provider value={{className: "task-button", size: "0.75em"}}>
 						<Button type="button" onClick={createEditTask}>
@@ -45,13 +45,7 @@ const Dashboard = () => {
 						</Button>
 					</IconContext.Provider>
 				</div>
-			
 			</Container>
-			{showModal &&
-				<Modal toggleModal={toggleModal}>
-					<AddTaskForm/>
-				</Modal>
-			}
 		</DashBoardContainer>
 	)
 }

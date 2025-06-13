@@ -11,8 +11,27 @@ export const OptionsPickerContainer = styled.div`
     position: relative;
     display: flex;
     align-items: center;
-    //top: 25px;
-    //left: 0;
+    
+    .alert-enter {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    
+    .alert-enter-active {
+        opacity: 1;
+        transform: translateX(0);
+        transition: opacity 300ms, transform 300ms;
+    }
+    
+    .alert-exit {
+        opacity: 1;
+    }
+    
+    .alert-exit-active {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: opacity 300ms, transform 300ms;
+    }
     
     span[class*="color-selected"] {
         ${spanStyles}
@@ -109,25 +128,5 @@ export const OptionsPickerContainer = styled.div`
         outline: none;
         cursor: pointer;
     }
-    
-    .popup-level-enter {
-        opacity: 0.5;
-        transform: scale(0.7);
-    }
-    
-    .popup-level-enter-active {
-        opacity: 1;
-        transform: translateX(0);
-        transition: opacity 400ms, transform 400ms;
-    }
-    
-    .popup-level-exit {
-        opacity: 1;
-    }
-    
-    .popup-level-exit-active {
-        opacity: 0;
-        transform: scale(0.7);
-        transition: opacity 400ms, transform 400ms;
-    }
+
 `;

@@ -55,6 +55,28 @@ export const ConfirmedCreateDeleteTask = styled.div`
     display: flex;
     align-items: center;
     
+    .modal-delete-enter {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    
+    .modal-delete-enter-active {
+        opacity: 1;
+        transform: translateX(0);
+        transition: opacity 300ms, transform 300ms;
+    }
+    
+    .modal-delete-exit {
+        opacity: 1;
+    }
+    
+    .modal-delete-exit-active {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: opacity 300ms, transform 300ms;
+    }
+    
+    
     button {
         ${transitionStyle};
     }

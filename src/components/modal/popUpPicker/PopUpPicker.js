@@ -1,10 +1,13 @@
-import {PopUpPickerContent, BackDrop} from "./PopUpPicker.styled";
-import React, {useEffect} from "react";
+import {PopUpPickerContent, BackDrop, OptionStylContainer} from "./PopUpPicker.styled";
+import React, {useEffect, useRef} from "react";
 import {createPortal} from "react-dom";
+import {CSSTransition} from "react-transition-group";
 
 const popupRoot = document.querySelector('#popup-root');
 
-const PopUpPicker = ({children, onClose}) => {
+const PopUpPicker = ({children, onClose, ref}) => {
+	
+	const nodeRef = useRef(null);
 	useEffect(() => {
 		window.addEventListener("keydown", onCLoseModal);
 		const body = document.querySelector("body");
@@ -31,8 +34,8 @@ const PopUpPicker = ({children, onClose}) => {
 	
 	return (
 		<>
-		<BackDrop onClick={onOverlayClose} />
-			<PopUpPickerContent>
+			<BackDrop onClick={onOverlayClose}/>
+			<PopUpPickerContent ref={ref}>
 				{children}
 			</PopUpPickerContent>
 		</>

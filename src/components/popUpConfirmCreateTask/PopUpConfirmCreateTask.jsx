@@ -1,7 +1,7 @@
 import {useEffect} from "react";
 import {PopUpConfirmBackDrop, PopUpContent} from "./PopUpConfirmCreateTask.styled";
 
-const PopUpConfirmCreateTask = ({children, onClose}) => {
+const PopUpConfirmCreateTask = ({children, onClose, ref}) => {
 	
 	useEffect(() => {
 		window.addEventListener("keydown", onCLoseModal);
@@ -24,7 +24,7 @@ const PopUpConfirmCreateTask = ({children, onClose}) => {
 	
 	return (
 		<PopUpConfirmBackDrop onClick={onOverlayClose}>
-			<PopUpContent>
+			<PopUpContent ref={ref}>
 				{children}
 			</PopUpContent>
 		</PopUpConfirmBackDrop>

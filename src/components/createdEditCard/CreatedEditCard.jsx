@@ -1,4 +1,4 @@
-import {useState, useRef} from "react";
+import {useRef, useState } from "react";
 import {useDispatch} from "react-redux";
 import {
 	CreateEditContainer,
@@ -12,22 +12,22 @@ import {ChoiceCategory} from "../card/Card.styled";
 import {ReactComponent as Star} from "../../images/star_blue.svg";
 import {ReactComponent as CancelCross} from "../../images/cancele-cross.svg";
 import addTask from "../../redux/tasks/tasksOperations"
-import {CSSTransition} from "react-transition-group";
 import Button from "../button";
 import PopUpConfirmCreateTask from "../popUpConfirmCreateTask";
-import Modal from "../modal";
-
+import UseAnimate from "../../hooks/UseAnimate";
 
 
 const CreateEditCard = ({
 							difficultyProp = "normal",
-							categoryProp = "stuff"
+							categoryProp = "stuff",
+							isDeleteCreatedTask
 						}) => {
 	const [category, setCategory] = useState(categoryProp);
 	const [difficulty, setDifficulty] = useState(difficultyProp);
 	const [date, setDate] = useState(new Date());
 	const [title, setTitle] = useState('');
 	const [isShowModal, setIsShowModal] = useState(false);
+	const nodeRef = useRef(null);
 	
 	
 	const dispatch = useDispatch();
@@ -76,13 +76,10 @@ const CreateEditCard = ({
 		console.log('item', item);
 	}
 	
-	
 	return (
 		<>
 			<CreateEditContainer onSubmit={onSubmit} className="create-edit-card">
 				<CreateEditHeaderCardContainer>
-					{/*<div className={isShowModal ? "level-box active" : "level-box"}>*/}
-					{/*	<span className="color-selected-level"></span>*/}
 					<OptionsPicker onChoiceLevel={onChoiceLevel} initialValue={difficulty} type='level'/>
 					<Star/>
 				</CreateEditHeaderCardContainer>
@@ -98,15 +95,15 @@ const CreateEditCard = ({
 					<ConfirmedCreateDeleteTask>
 						<Button type="button" className="cancel-task"
 								onClick={() => setIsShowModal(true)}><CancelCross/></Button>
-						{isShowModal &&
-							<PopUpConfirmCreateTask onClose={() => setIsShowModal(false)}>
+						<UseAnimate show={isShowModal} nodeRef={nodeRef} className="modal-delete">
+							<PopUpConfirmCreateTask onClose={() => setIsShowModal(false)} ref={nodeRef}>
 								<h4 className="popUp-title">Delete this quest?</h4>
 								<div className="popUp-button-container">
 									<Button onClick={() => setIsShowModal(false)}>Cancel</Button>
-									<Button>Delete</Button>
+									<Button onClick={isDeleteCreatedTask}>Delete</Button>
 								</div>
 							</PopUpConfirmCreateTask>
-						}
+						</UseAnimate>
 						<Button type="submit" className="create-task">Create</Button>
 					</ConfirmedCreateDeleteTask>
 				</FooterEditCardContainer>
@@ -114,5 +111,8 @@ const CreateEditCard = ({
 		</>
 	)
 }
+
+
+
 
 export default CreateEditCard;
