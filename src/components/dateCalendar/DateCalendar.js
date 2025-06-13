@@ -1,12 +1,12 @@
 import React from "react";
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import {DiaryDateCalendarContainer} from "./DateCalendar.styled"
 import {ReactComponent as CalendarLogo} from "../../images/calendar.svg";
 
 const DateCalendar = ({selectDate, elemDate}) => {
     return (
-        <DiaryDateCalendarContainer>
-            <>
+        <DiaryDateCalendarContainer className="date-picker-calendar">
                 <DatePicker
                     className="datePicker"
                     selected={elemDate}
@@ -14,8 +14,7 @@ const DateCalendar = ({selectDate, elemDate}) => {
                     onChange={(date) => selectDate(date)}
                 />
                 <CalendarLogo className="datePickerLogo"/>
-            </>
-        </DiaryDateCalendarContainer>
+		</DiaryDateCalendarContainer>
     );
 };
 

@@ -15,6 +15,7 @@ import addTask from "../../redux/tasks/tasksOperations"
 import {CSSTransition} from "react-transition-group";
 import Button from "../button";
 import PopUpConfirmCreateTask from "../popUpConfirmCreateTask";
+import Modal from "../modal";
 
 
 
@@ -26,7 +27,7 @@ const CreateEditCard = ({
 	const [difficulty, setDifficulty] = useState(difficultyProp);
 	const [date, setDate] = useState(new Date());
 	const [title, setTitle] = useState('');
-	const [isShowLevel, setIsShowLevel] = useState(false);
+	const [isShowModal, setIsShowModal] = useState(false);
 	
 	
 	const dispatch = useDispatch();
@@ -78,32 +79,35 @@ const CreateEditCard = ({
 	
 	return (
 		<>
-			<CreateEditContainer onSubmit={onSubmit}>
+			<CreateEditContainer onSubmit={onSubmit} className="create-edit-card">
 				<CreateEditHeaderCardContainer>
 					{/*<div className={isShowModal ? "level-box active" : "level-box"}>*/}
 					{/*	<span className="color-selected-level"></span>*/}
 					<OptionsPicker onChoiceLevel={onChoiceLevel} initialValue={difficulty} type='level'/>
 					<Star/>
 				</CreateEditHeaderCardContainer>
-				<CardInput>
-					<label htmlFor="enter-title">Create a new quest</label>
-					<input type="text" id="enter-title" name="title" required minLength="3" autoFocus/>
-				</CardInput>
-				<DateCalendar selectDate={setDate} elemDate={date}/>
+				<div className="create-edit-input-box">
+					<CardInput>
+						<label htmlFor="enter-title">Create a new quest</label>
+						<input type="text" id="enter-title" name="title" required minLength="3" autoFocus/>
+					</CardInput>
+					<DateCalendar selectDate={setDate} elemDate={date} className="date-picker-calendar"/>
+				</div>
 				<FooterEditCardContainer>
 					<OptionsPicker onChoiceLevel={onChoiceLevel} initialValue={category} type="category"/>
-					
-					{/*<ChoiceCategory onClick={handleChangeCardForm} className="category">*/}
-					{/*	<select name="category">*/}
-					{/*		{categoryArray.map((item, index) => (*/}
-					{/*			<option key={index} value={item}>{item}</option>*/}
-					{/*		))}*/}
-					{/*	</select>*/}
-					{/*</ChoiceCategory>*/}
 					<ConfirmedCreateDeleteTask>
-						<Button type="button" className="cancel-task"><CancelCross/></Button>
+						<Button type="button" className="cancel-task"
+								onClick={() => setIsShowModal(true)}><CancelCross/></Button>
+						{isShowModal &&
+							<PopUpConfirmCreateTask onClose={() => setIsShowModal(false)}>
+								<h4 className="popUp-title">Delete this quest?</h4>
+								<div className="popUp-button-container">
+									<Button onClick={() => setIsShowModal(false)}>Cancel</Button>
+									<Button>Delete</Button>
+								</div>
+							</PopUpConfirmCreateTask>
+						}
 						<Button type="submit" className="create-task">Create</Button>
-						{/*<PopUpConfirmCreateTask isShowModal={isShowDeleteModal} onClose={toggleModal}/>*/}
 					</ConfirmedCreateDeleteTask>
 				</FooterEditCardContainer>
 			</CreateEditContainer>
