@@ -10,8 +10,10 @@ const DateCalendar = ({selectDate, elemDate}) => {
                 <DatePicker
                     className="datePicker"
                     selected={elemDate}
-                    dateFormat="dd.MM.yyyy"
                     onChange={(date) => selectDate(date)}
+                    timeInputLabel="Time:"
+                    dateFormat="MM/dd/yyyy h:mm aa"
+                    showTimeInput
                 />
                 <CalendarLogo className="datePickerLogo"/>
 		</DiaryDateCalendarContainer>
