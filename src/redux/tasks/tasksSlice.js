@@ -20,7 +20,7 @@ const taskSlice = createSlice({
 				state.isLoading = true;
 			})
 			.addCase(tasksOperations.getTasks.fulfilled, (state, action) => {
-				console.log("getTasks", action);
+				// console.log("tasks", action);
 				state.data = action.payload.data.tasks;
 				state.isLoading = false;
 				state.error = null;
@@ -31,34 +31,34 @@ const taskSlice = createSlice({
 			})
 			
 			
-			.addCase(tasksOperations.addTask.pending, (state, _) => {
+			.addCase(tasksOperations.createTask.pending, (state, _) => {
 				state.isLoading = true;
 			})
-			.addCase(tasksOperations.addTask.fulfilled, (state, action) => {
-				console.log("addTask", action);
+			.addCase(tasksOperations.createTask.fulfilled, (state, action) => {
+				// console.log("tasks", action);
 				state.data = [...state.data, action.payload.data.task];
 				state.isLoading = false;
 				state.error = null;
 			})
-			.addCase(tasksOperations.addTask.rejected, (state, action) => {
+			.addCase(tasksOperations.createTask.rejected, (state, action) => {
 				state.error = action.payload;
 				state.isLoading = false;
 			})
-		
-		// .addCase(addUserProductByDay.pending, (state, _) => {
-		// 	state.isLoading = true;
-		// })
-		// .addCase(addUserProductByDay.fulfilled, (state, action) => {
-		// 	state.eatenProduct = action.payload.data.eatenProduct;
-		// 	state.day = action.payload.data.newDay ? action.payload.data.newDay : action.payload.data.day;
-		// 	state.day.daySummary = action.payload.data.newSummary ? action.payload.data.newSummary : action.payload.data.daySummary;
-		// 	state.isLoading = false;
-		// 	state.error = null;
-		// })
-		// .addCase(addUserProductByDay.rejected, (state, action) => {
-		// 	state.error = action.payload;
-		// 	state.isLoading = false;
-		// })
+			
+			.addCase(tasksOperations.updateTask.pending, (state, _) => {
+				state.isLoading = true;
+			})
+			.addCase(tasksOperations.updateTask.fulfilled, (state, action) => {
+				console.log("action", action.payload)
+				console.log("state", state)
+				state.data = [...state.data, action.payload.data.task];
+				state.isLoading = false;
+				state.error = null;
+			})
+			.addCase(tasksOperations.updateTask.rejected, (state, action) => {
+				state.error = action.payload;
+				state.isLoading = false;
+			})
 	}
 })
 

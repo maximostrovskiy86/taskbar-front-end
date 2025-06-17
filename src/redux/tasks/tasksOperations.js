@@ -9,7 +9,7 @@ const getTasks = createAsyncThunk('tasks/getTasks',
 		try {
 			const response = await axios.get('/tasks');
 			// token.set(response.data.accessToken);
-			console.log("LoginUser", response);
+			// console.log("LoginUser", response);
 			
 			return response;
 		} catch (err) {
@@ -18,7 +18,7 @@ const getTasks = createAsyncThunk('tasks/getTasks',
 		}
 	});
 
-const addTask = createAsyncThunk('tasks/addTask',
+const createTask = createAsyncThunk('tasks/addTask',
 	async (credentials, thunkAPI) => {
 		
 		try {
@@ -32,9 +32,25 @@ const addTask = createAsyncThunk('tasks/addTask',
 	})
 
 
+const updateTask = createAsyncThunk('tasks/updateTask',
+	async (credentials, thunkAPI) => {
+	const {id} = credentials;
+	const {category, difficulty, taskDate, taskName} = credentials;
+		try {
+			
+			const response = await axios.put(`/tasks/${id}`, {category, difficulty, taskDate, taskName});
+			console.log("response", response);
+			
+			return response;
+		} catch (err) {
+			return thunkAPI.rejectWithValue(err);
+		}
+	})
+
 const tasksOperations = {
 	getTasks,
-	addTask,
+	createTask,
+	updateTask
 }
 
 export default tasksOperations;

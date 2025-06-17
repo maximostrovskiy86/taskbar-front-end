@@ -1,4 +1,4 @@
-import {useRef, useState } from "react";
+import {useRef, useState} from "react";
 import {useDispatch} from "react-redux";
 import {
 	CreateEditContainer,
@@ -8,93 +8,125 @@ import {
 } from "./CreatedEditCard.styled";
 import OptionsPicker from "../optionsPicker";
 import DateCalendar from "../dateCalendar";
-import {ChoiceCategory} from "../card/Card.styled";
 import {ReactComponent as Star} from "../../images/star_blue.svg";
 import {ReactComponent as CancelCross} from "../../images/cancele-cross.svg";
-import addTask from "../../redux/tasks/tasksOperations"
+import {ReactComponent as DoneTask} from "../../images/done.svg";
+import {ReactComponent as UpdateTask} from "../../images/save.svg";
+import tasksOperations from "../../redux/tasks/tasksOperations"
 import Button from "../button";
 import PopUpConfirmCreateTask from "../popUpConfirmCreateTask";
 import UseAnimate from "../../hooks/UseAnimate";
+import {toast} from "react-toastify";
+
 
 
 const CreateEditCard = ({
 							difficultyProp = "normal",
 							categoryProp = "stuff",
-							isDeleteCreatedTask
+							isDeleteCreatedTask,
+							task = {},
+							// textProp = "",
+							handleHideCard,
+							isUpdateCard = false
 						}) => {
+	const dispatch = useDispatch();
+	
 	const [category, setCategory] = useState(categoryProp);
 	const [difficulty, setDifficulty] = useState(difficultyProp);
 	const [date, setDate] = useState(new Date());
-	const [title, setTitle] = useState('');
+	const [taskName, setTaskName] = useState("");
 	const [isShowModal, setIsShowModal] = useState(false);
 	const nodeRef = useRef(null);
-	
-	
-	const dispatch = useDispatch();
-	
+	// console.log("TASK", task);
 	const handleChangeCardForm = (e) => {
+		// console.log("e", e.target.value)
 		const {value, name} = e.target;
 		
 		switch (name) {
-			// case "level":
-			// 	setLevel(value);
-			// 	break;
 			case "title":
-				setTitle(value);
-				break;
-			case "category":
-				setCategory(value);
+				setTaskName(value);
 				break;
 			default:
 				return;
 		}
 	}
 	
-	const onSubmit = (e) => {
-		e.preventDefault();
+	const handleError = () => toast.error("Enter a task title, please");
+	
+	const onHandleCreateTask = (e) => {
+		console.log("e", e)
 		
 		const dataTask = {
 			difficulty,
-			title,
 			category,
-			date,
+			taskName: taskName,
+			taskDate: date,
 		}
 		
-		dispatch(addTask(dataTask));
+		if (taskName === "") {
+			handleError();
+			return;
+		}
 		
+		dispatch(tasksOperations.createTask(dataTask));
+		
+		setTaskName("");
 	}
 	
-	const onChoiceLevel = (item) => {
-		// setLevelDate({
-		// 	...levelDate,
-		// 	level: item.level,
-		// 	color: item.color,
-		// })
+	const onHandleUpdateTask = () => {
+		const updateDataTask = {
+			difficulty,
+			category,
+			taskName: taskName,
+			taskDate: date,
+			id: task._id
+		}
 		
-		// setIsShowModal(false);
+		// if (title === "") {
+		// 	handleError();
+		// 	return;
+		// }
 		
-		console.log('item', item);
+		dispatch(tasksOperations.updateTask(updateDataTask));
+		handleHideCard();
+		
+		// setTitle("");
 	}
-	
+	// console.log("TITLE", taskName)
 	return (
 		<>
-			<CreateEditContainer onSubmit={onSubmit} className="create-edit-card">
+			<CreateEditContainer className="create-edit-card">
 				<CreateEditHeaderCardContainer>
-					<OptionsPicker onChoiceLevel={onChoiceLevel} initialValue={difficulty} type='level'/>
+					<OptionsPicker getOptionValue={setDifficulty} initialValue={difficulty} type='level'/>
 					<Star/>
 				</CreateEditHeaderCardContainer>
 				<div className="create-edit-input-box">
 					<CardInput>
 						<label htmlFor="enter-title">Create a new quest</label>
-						<input type="text" id="enter-title" name="title" required minLength="3" autoFocus/>
+						<input type="text" id="enter-title" name="title" required minLength="3" autoFocus
+							   value={taskName}
+							   onChange={handleChangeCardForm}/>
 					</CardInput>
 					<DateCalendar selectDate={setDate} elemDate={date} className="date-picker-calendar"/>
 				</div>
 				<FooterEditCardContainer>
-					<OptionsPicker onChoiceLevel={onChoiceLevel} initialValue={category} type="category"/>
+					<OptionsPicker getOptionValue={setCategory} initialValue={category} type="category"/>
 					<ConfirmedCreateDeleteTask>
-						<Button type="button" className="cancel-task"
-								onClick={() => setIsShowModal(true)}><CancelCross/></Button>
+						{!isUpdateCard ? (
+							<>
+								<Button type="button" className="cancel-task"
+										onClick={() => setIsShowModal(true)}><CancelCross/></Button>
+								<Button type="submit" onClick={onHandleCreateTask}
+										className="create-task">Create</Button>
+							</>
+						) : (
+							<>
+								<Button type="button" onClick={onHandleUpdateTask}><UpdateTask/></Button>
+								<Button type="button"><CancelCross/></Button>
+								<Button type="button"><DoneTask/></Button>
+							</>
+						)}
+						
 						<UseAnimate show={isShowModal} nodeRef={nodeRef} className="modal-delete">
 							<PopUpConfirmCreateTask onClose={() => setIsShowModal(false)} ref={nodeRef}>
 								<h4 className="popUp-title">Delete this quest?</h4>
@@ -104,7 +136,6 @@ const CreateEditCard = ({
 								</div>
 							</PopUpConfirmCreateTask>
 						</UseAnimate>
-						<Button type="submit" className="create-task">Create</Button>
 					</ConfirmedCreateDeleteTask>
 				</FooterEditCardContainer>
 			</CreateEditContainer>

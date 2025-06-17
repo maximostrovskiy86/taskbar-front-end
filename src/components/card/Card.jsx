@@ -1,28 +1,19 @@
-import {CardContainer, CardHeader, ChoiceCategory} from './Card.styled'
-import {ReactComponent as Fire} from "../../images/fire.svg";
-import {ReactComponent as Star} from "../../images/star_blue.svg";
+import StaticCard from "../staticCard";
+import CreateEditCard from "../createdEditCard";
+import {useState} from "react";
 
 
 const Card = ({task}) => {
-	// const {title, level, date, category} = task;
+	const [isUpdateCard, setIsUpdateCard] = useState(false);
 	
 	return (
-		<CardContainer className="card">
-			<CardHeader>
-				<span className="level">
-					{/*{level}*/}
-				</span>
-				<Star/>
-			</CardHeader>
-			<div className="main-card">
-				{/*<h3 className="title-task">{title}</h3>*/}
-				<div>
-					{/*<span className="date">{date}</span>*/}
-					<Fire/>
-				</div>
-			</div>
-			{/*<ChoiceCategory>{category}</ChoiceCategory>*/}
-		</CardContainer>
+		<div className="card" onClick={() => setIsUpdateCard(true)}>
+			{isUpdateCard ?
+				<CreateEditCard task={task} isUpdateCard={isUpdateCard} handleHideCard={() => setIsUpdateCard(false)}/>
+				:
+				<StaticCard task={task}/>
+			}
+		</div>
 	)
 }
 

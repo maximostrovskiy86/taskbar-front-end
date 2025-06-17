@@ -1,19 +1,21 @@
 import Card from "../card";
 import CreateEditCard from "../createdEditCard";
+import {useState} from "react";
 
 
-const CardLists = ({isCreateFormShown = false, tasks, toggleModal}) => {
+const CardLists = ({isCreateFormShow = false, tasks, onCloseModal}) => {
 	
 	return (
 		<div>
-			{isCreateFormShown && (
+			{isCreateFormShow && (
 				<div className="cardListItem">
-					<CreateEditCard isDeleteCreatedTask={toggleModal}/>
+					<CreateEditCard isDeleteCreatedTask={onCloseModal}/>
 				</div>
 			)}
-			{tasks && tasks.map((item, index) => {
-				return <Card key={item.id} task={item}/>
-			})}
+			{tasks && tasks.map((item) => {
+				return <Card key={item._id} task={item}/>
+			}).reverse()
+			}
 		</div>
 	)
 }

@@ -53,7 +53,7 @@ export const OptionsPickerContainer = styled.div`
         li {
             display: flex;
             align-items: center;
-            text-transform: capitalize;
+            text-transform: uppercase;
             cursor: pointer;
             transition: color 0.4s cubic-bezier(0.2, 0.5, 0.5, 1);
             

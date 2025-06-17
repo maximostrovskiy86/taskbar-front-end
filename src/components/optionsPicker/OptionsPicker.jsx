@@ -20,10 +20,9 @@ const CATEGORY_ARRAY = [
 ]
 
 
-const OptionsPicker = ({onChoiceLevel, initialValue, isShowLevel, type}) => {
+const OptionsPicker = ({getOptionValue, initialValue, type}) => {
 	const [value, setValue] = useState(initialValue);
 	const [colorValue, setValueColor] = useState("#b9c3c8");
-	const [isShowCategory, seIsShowCategory] = useState(true);
 	const [showPopUp, setShowPopUp] = useState(false);
 	const nodeRef = useRef(null);
 	
@@ -31,11 +30,11 @@ const OptionsPicker = ({onChoiceLevel, initialValue, isShowLevel, type}) => {
 	const typeOptions = type === "level" ? DIFFICULTY_ARRAY : CATEGORY_ARRAY;
 	const isLevel = type === "level";
 	const isCategory = type === "category";
-	console.log("typeOptions")
-	const handleOptionsChange = (option) => {
-		console.log("e", option);
-		setValue(option.name);
-		setValueColor(option.color);
+	// console.log("typeOptions")
+	const handleOptionsChange = ({name, color}) => {
+		setValue(name);
+		setValueColor(color);
+		getOptionValue(name);
 		setShowPopUp(false);
 	}
 	

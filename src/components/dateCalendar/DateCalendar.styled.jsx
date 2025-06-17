@@ -15,7 +15,7 @@ export const DiaryDateCalendarContainer = styled.div`
     
     
     .datePicker {
-        width: 180px;
+        width: 190px;
         font-weight: 400;
         font-size: 16px;
         //text-align: center;
@@ -30,8 +30,8 @@ export const DiaryDateCalendarContainer = styled.div`
     
     .datePickerLogo {
         position: absolute;
-        top: 2px;
-        right: 25px;
+        top: 0;
+        right: 23px;
         width: 20px;
         height: 20px;
     }
