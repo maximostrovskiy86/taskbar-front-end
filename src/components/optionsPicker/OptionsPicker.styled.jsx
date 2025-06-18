@@ -88,15 +88,18 @@ export const OptionsPickerContainer = styled.div`
             content: '';
             position: absolute;
             right: ${(props) => {
-                return props.isCategoryChoice ? '6%' : "-10px"
+                return props.$isChoceCategory ? '6%' : "-10px"
             }};
-            top: ${(props) => props.isCategoryChoice ? "14px" : "10px"};
+            top: ${(props) => {
+                return props.$isChoceCategory ? "14px" : "10px"
+            }
+            };
             border: 5px solid transparent;
             border-top: 5px solid ${({theme}) => theme.colors.secondary};
         }
         
         &.active::after {
-            top: ${(props) => props.isCategoryChoice ? "9px" : "3px"};
+            top: ${(props) => props.$isChoceCategory ? "9px" : "3px"};
             transform: rotate(180deg);
             transition: transform 350ms cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -128,5 +131,28 @@ export const OptionsPickerContainer = styled.div`
         outline: none;
         cursor: pointer;
     }
-
+    
+    .stuff {
+        background-color: #b9c3c8;
+    }
+    
+    .family {
+        background-color: #ffe6d3;
+    }
+    
+    .health {
+        background-color: #cdf7ff;
+    }
+    
+    .learning {
+        background-color: #fff6c0;
+    }
+    
+    .leisure {
+        background-color: #f8d2ff;
+    }
+    
+    .work {
+        background-color: #d3f6ce;
+    }
 `;

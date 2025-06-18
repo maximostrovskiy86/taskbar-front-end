@@ -49,9 +49,10 @@ const taskSlice = createSlice({
 				state.isLoading = true;
 			})
 			.addCase(tasksOperations.updateTask.fulfilled, (state, action) => {
-				console.log("action", action.payload)
-				console.log("state", state)
-				state.data = [...state.data, action.payload.data.task];
+				const index = state.data.findIndex(task => task._id === action.payload.data.task._id);
+				
+				state.data.splice(index, 1, action.payload.data.task);
+				// state.data[index] = action.payload.data.task; // second variant
 				state.isLoading = false;
 				state.error = null;
 			})

@@ -23,18 +23,21 @@ import {toast} from "react-toastify";
 const CreateEditCard = ({
 							difficultyProp = "normal",
 							categoryProp = "stuff",
-							isDeleteCreatedTask,
-							task = {},
-							// textProp = "",
+							textPropName = "",
+							id = null,
+							taskDate,
 							handleHideCard,
-							isUpdateCard = false
+							isUpdateCard,
+							isDeleteCreatedTask,
+							
 						}) => {
 	const dispatch = useDispatch();
 	
 	const [category, setCategory] = useState(categoryProp);
 	const [difficulty, setDifficulty] = useState(difficultyProp);
+	const [taskName, setTaskName] = useState(textPropName);
+	
 	const [date, setDate] = useState(new Date());
-	const [taskName, setTaskName] = useState("");
 	const [isShowModal, setIsShowModal] = useState(false);
 	const nodeRef = useRef(null);
 	// console.log("TASK", task);
@@ -71,15 +74,20 @@ const CreateEditCard = ({
 		dispatch(tasksOperations.createTask(dataTask));
 		
 		setTaskName("");
+		setCategory("stuff");
+		setDifficulty("normal");
 	}
 	
-	const onHandleUpdateTask = () => {
+	const onHandleUpdateTask = (event) => {
+		console.log("e", event);
+		event.stopPropagation();
+		
 		const updateDataTask = {
 			difficulty,
 			category,
 			taskName: taskName,
 			taskDate: date,
-			id: task._id
+			id: id
 		}
 		
 		// if (title === "") {
@@ -88,7 +96,7 @@ const CreateEditCard = ({
 		// }
 		
 		dispatch(tasksOperations.updateTask(updateDataTask));
-		handleHideCard();
+		handleHideCard(false);
 		
 		// setTitle("");
 	}

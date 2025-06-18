@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
 export const ButtonContainer = styled.button`
-	// &.choice-category {
-	// 	color: ${({ theme }) => theme.colors.text};
-	// }
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -19,16 +16,7 @@ export const ButtonContainer = styled.button`
     border: none;
     outline: none;
     cursor: pointer;
-    
-    background-color: ${props => {
-        // console.log("PROPS", props)
-        return props.isCategory ? props.bg : "transparent"
-    }};
-	
     transition: transform 250ms ease-in;
-    
-
-	
 `;
 
 

@@ -1,6 +1,5 @@
 import Card from "../card";
 import CreateEditCard from "../createdEditCard";
-import {useState} from "react";
 
 
 const CardLists = ({isCreateFormShow = false, tasks, onCloseModal}) => {
@@ -12,8 +11,8 @@ const CardLists = ({isCreateFormShow = false, tasks, onCloseModal}) => {
 					<CreateEditCard isDeleteCreatedTask={onCloseModal}/>
 				</div>
 			)}
-			{tasks && tasks.map((item) => {
-				return <Card key={item._id} task={item}/>
+			{tasks && tasks.map((task) => {
+				return <Card key={task._id} task={task} />
 			}).reverse()
 			}
 		</div>

@@ -22,43 +22,41 @@ const CATEGORY_ARRAY = [
 
 const OptionsPicker = ({getOptionValue, initialValue, type}) => {
 	const [value, setValue] = useState(initialValue);
-	const [colorValue, setValueColor] = useState("#b9c3c8");
 	const [showPopUp, setShowPopUp] = useState(false);
 	const nodeRef = useRef(null);
-	
 	
 	const typeOptions = type === "level" ? DIFFICULTY_ARRAY : CATEGORY_ARRAY;
 	const isLevel = type === "level";
 	const isCategory = type === "category";
-	// console.log("typeOptions")
+	
 	const handleOptionsChange = ({name, color}) => {
 		setValue(name);
-		setValueColor(color);
 		getOptionValue(name);
 		setShowPopUp(false);
 	}
 	
 	return (
-		<OptionsPickerContainer isCategoryChoice={isCategory}>
+		<OptionsPickerContainer $isChoceCategory={isCategory}>
 			{isLevel && <span className={`color-selected-${value}`}></span>}
 			<Button onClick={() => setShowPopUp(true)}
-					className={isCategory ? `choice-category-btn ${showPopUp && "active"}` : `choice-level-btn ${showPopUp && "active"}`}
-					bg={colorValue} isCategoryChoice={isCategory}>{value}</Button>
-				<UseAnimate show={showPopUp} nodeRef={nodeRef} className="alert">
-					<PopUpPicker onClose={() => setShowPopUp(false)} showPopUp={showPopUp} ref={nodeRef} className="popUp">
-						{typeOptions &&
-							<ul className="option-list">
-								{typeOptions.map((option, index) => (
-									<li key={index} onClick={() => handleOptionsChange(option)}
-										className={isLevel ? "" : "category-item"}>
-										{isLevel && <span className={`color-selected-${option.name}`}></span>}
-										{option.name}
-									</li>
-								))}
-							</ul>
-						}
-					</PopUpPicker>
-				</UseAnimate>
+					className={isCategory ? `choice-category-btn ${showPopUp ? "active" : ""} ${initialValue}` : `choice-level-btn ${showPopUp ? "active" : ""}`}>
+				{value}
+			</Button>
+			<UseAnimate show={showPopUp} nodeRef={nodeRef} className="alert">
+				<PopUpPicker onClose={() => setShowPopUp(false)} showPopUp={showPopUp} ref={nodeRef} className="popUp">
+					{typeOptions &&
+						<ul className="option-list">
+							{typeOptions.map((option, index) => (
+								<li key={index} onClick={() => handleOptionsChange(option)}
+									className={isLevel ? "" : "category-item"}>
+									{isLevel && <span className={`color-selected-${option.name}`}></span>}
+									{option.name}
+								</li>
+							))}
+						</ul>
+					}
+				</PopUpPicker>
+			</UseAnimate>
 		</OptionsPickerContainer>
 	)
 }
