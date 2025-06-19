@@ -3,7 +3,6 @@ import axios from "axios";
 
 axios.defaults.baseURL = "http://localhost:8080/api";
 
-
 const getTasks = createAsyncThunk('tasks/getTasks',
 	async (credentials, thunkAPI) => {
 		try {
@@ -17,6 +16,7 @@ const getTasks = createAsyncThunk('tasks/getTasks',
 			return thunkAPI.rejectWithValue(err);
 		}
 	});
+
 
 const createTask = createAsyncThunk('tasks/addTask',
 	async (credentials, thunkAPI) => {
@@ -47,6 +47,7 @@ const updateTask = createAsyncThunk('tasks/updateTask',
 		}
 	})
 
+
 const deleteTask = createAsyncThunk('tasks/deleteTask',
 	async (id, thunkAPI) => {
 		
@@ -60,11 +61,28 @@ const deleteTask = createAsyncThunk('tasks/deleteTask',
 		}
 	})
 
+
+const updateStatusTask = createAsyncThunk('tasks/updateStatusTask',
+	async (credentials, thunkAPI) => {
+		const {id, completed} = credentials;
+		console.log("updateStatusTask", credentials);
+		try {
+			const response = await axios.patch(`/tasks/${id}/status`, {status: completed});
+			console.log("UPDATESTATUS", response);
+			
+			return response;
+		} catch (err) {
+			return thunkAPI.rejectWithValue(err);
+		}
+	})
+
+
 const tasksOperations = {
 	getTasks,
 	createTask,
 	updateTask,
-	deleteTask
+	deleteTask,
+	updateStatusTask
 }
 
 export default tasksOperations;

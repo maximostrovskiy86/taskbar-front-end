@@ -19,12 +19,12 @@ import UseAnimate from "../../hooks/UseAnimate";
 import {toast} from "react-toastify";
 
 
-
 const CreateEditCard = ({
 							difficultyProp = "normal",
 							categoryProp = "stuff",
 							textPropName = "",
 							id = null,
+							isCompleted = false,
 							taskDate,
 							handleHideCard,
 							isUpdateCard,
@@ -74,8 +74,8 @@ const CreateEditCard = ({
 		dispatch(tasksOperations.createTask(dataTask));
 		
 		setTaskName("");
-		setCategory("stuff");
-		setDifficulty("normal");
+		// setCategory("stuff");
+		// setDifficulty("normal");
 	}
 	const onHandleUpdateTask = (event) => {
 		console.log("e", event);
@@ -114,6 +114,13 @@ const CreateEditCard = ({
 		setIsShowModal(false);
 	}
 	
+	const onHandleUpdateStatusTask = (id) => {
+		dispatch(tasksOperations.updateStatusTask({
+			completed: !isCompleted,
+			id
+		}));
+	}
+	
 	return (
 		<>
 			<CreateEditContainer className="create-edit-card">
@@ -142,9 +149,9 @@ const CreateEditCard = ({
 							</>
 						) : (
 							<>
-								<Button type="button" onClick={onHandleUpdateTask}><UpdateTask/></Button>
-								<Button type="submit" onClick={() => setIsShowModal(true)}><DeleteTask/></Button>
-								<Button type="button"><DoneTask/></Button>
+								<Button type="submit" onClick={onHandleUpdateTask}><UpdateTask/></Button>
+								<Button type="button" onClick={() => setIsShowModal(true)}><DeleteTask/></Button>
+								<Button type="submit" onClick={() => onHandleUpdateStatusTask(id)}><DoneTask/></Button>
 							</>
 						)}
 						

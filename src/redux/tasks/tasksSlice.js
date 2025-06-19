@@ -74,6 +74,23 @@ const taskSlice = createSlice({
 				state.error = action.payload;
 				state.isLoading = false;
 			})
+			
+			// UPDATE STATUS TASK
+			.addCase(tasksOperations.updateStatusTask.pending, (state, _) => {
+				state.isLoading = true;
+			})
+			.addCase(tasksOperations.updateStatusTask.fulfilled, (state, action) => {
+				console.log("ACTION", action)
+				const index = state.data.findIndex(task => task._id === action.payload.data.task._id);
+				state.data.splice(index, 1, action.payload.data.task);
+				
+				state.isLoading = false;
+				state.error = null;
+			})
+			.addCase(tasksOperations.updateStatusTask.rejected, (state, action) => {
+				state.error = action.payload;
+				state.isLoading = false;
+			})
 	}
 })
 

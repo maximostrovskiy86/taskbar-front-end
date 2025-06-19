@@ -2,15 +2,15 @@ import Card from "../card";
 import CreateEditCard from "../createdEditCard";
 
 
-const CardLists = ({isCreateFormShow = false, tasks, onCloseModal}) => {
-	
+const CardLists = ({isCreateFormShow = false, tasks}) => {
+	console.log("TASKCARDLIST", tasks);
 	return (
 		<div>
-			{isCreateFormShow && (
-				<div className="cardListItem">
-					<CreateEditCard isDeleteCreatingTask={onCloseModal}/>
-				</div>
-			)}
+			{/*{isCreateFormShow && !isStatus && (*/}
+			{/*	<div className="cardListItem">*/}
+			{/*		<CreateEditCard isDeleteCreatingTask={onCloseModal}/>*/}
+			{/*	</div>*/}
+			{/*)}*/}
 			{tasks && tasks.map((task) => {
 				return <Card key={task._id} task={task}/>
 			}).reverse()

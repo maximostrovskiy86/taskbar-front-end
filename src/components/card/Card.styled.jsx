@@ -13,7 +13,14 @@ export const CardContainer = styled.div`
     color: ${({theme}) => theme.colors.text};
     
     border-radius: 15px;
+	cursor: pointer;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    transition: all 300ms ease-in-out;
+	
+	&:hover {
+        box-shadow: 4px 0 8px 2px rgba(0, 0, 0, 0.25);
+        
+    }
     
     .main-card {
         font-size: 20px;

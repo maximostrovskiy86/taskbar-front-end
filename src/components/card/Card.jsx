@@ -6,7 +6,7 @@ import {useState} from "react";
 const Card = ({task}) => {
 	const [isUpdateCard, setIsUpdateCard] = useState(false);
 	// console.log("TASK", task);
-	const {difficulty, category, taskName, taskDate, _id} = task;
+	const {difficulty, category, taskName, taskDate, _id, completed} = task;
 	
 	return (
 		<div className={`card ${task._id}`}>
@@ -17,6 +17,7 @@ const Card = ({task}) => {
 					textPropName={taskName}
 					taskDate={taskDate}
 					id={_id}
+					isCompleted={completed}
 					
 					isUpdateCard={isUpdateCard}
 					handleHideCard={() => setIsUpdateCard(false)}/>
@@ -26,6 +27,8 @@ const Card = ({task}) => {
 					categoryProp={category}
 					textPropName={taskName}
 					taskDate={taskDate}
+					isCompleted={completed}
+					
 					id={_id}
 					
 					onClick={() => {

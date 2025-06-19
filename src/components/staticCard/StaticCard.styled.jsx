@@ -36,6 +36,16 @@ export const CardHeaderStyle = styled.div`
     .hard {
         background-color: #DB0837;
     }
+	
+	div.star-static-card {
+		display: block;
+		cursor: pointer;
+		transition: transform 0.5s ease-in-out;
+		
+		&:hover {
+			transform: scale(1.05);
+        }
+	}
 `;
 export const CategoryContainer = styled.div`
     display: flex;
