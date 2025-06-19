@@ -1,9 +1,9 @@
 import React from "react";
 import {ButtonContainer} from "./Button.styled";
 
-const Button = ({type = "submit", onClick, children, className = "", bg = "", isCategoryChoice = false}) => {
+const Button = ({type = "submit", onClick, children, className = ""}) => {
 	return (
-		<ButtonContainer className={className} bg={bg} type={type} onClick={onClick} isCategory={isCategoryChoice}>
+		<ButtonContainer className={className} type={type} onClick={onClick} >
 			{children}
 		</ButtonContainer>
 	);

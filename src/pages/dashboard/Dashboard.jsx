@@ -4,54 +4,49 @@ import {DashBoardContainer} from "./Dashboard.styled";
 import CardLists from "../../components/cardLists";
 import Container from "../../components/container";
 import Button from "../../components/button";
-import Modal from "../../components/modal";
-import AddTaskForm from "../../components/addTaskForm";
-import {getAllTasks} from "../../redux/tasks/tasksSelectors";
+import {getAllActiveTasks, getAllCompletedTasks} from "../../redux/tasks/tasksSelectors";
 import {useEffect} from "react";
 import tasksOperations from "../../redux/tasks/tasksOperations";
 import {FaPlus} from "react-icons/fa";
 import {IconContext} from "react-icons";
-import CardList from "../../components/cardLists";
+import CreateEditCard from "../../components/createdEditCard";
 
 
 const Dashboard = () => {
-	const [showModal, setShowModal] = useState(false);
-	const [isCreateFormShown, setIsCreateFormShown] = useState(false);
+	const [isCreateFormShow, setIsCreateFormShow] = useState(true);
 	
 	const dispatch = useDispatch();
-	const tasks = useSelector(getAllTasks);
+	const tasksActive = useSelector(getAllActiveTasks);
+	const completedTasks = useSelector(getAllCompletedTasks);
 	
 	useEffect(() => {
 		dispatch(tasksOperations.getTasks())
 	}, [dispatch])
 	
-	const toggleModal = () => {
-		setShowModal(!showModal);
-	}
-	
-	const createEditTask = () => {
-		setIsCreateFormShown(true)
-	}
-	
-	console.log("tasks", tasks);
 	return (
 		<DashBoardContainer>
 			<Container>
-				<CardLists tasks={tasks} isCreateFormShown={isCreateFormShown}/>
+				{isCreateFormShow && (
+					<div className="cardListItem">
+						<CreateEditCard isDeleteCreatingTask={() => setIsCreateFormShow(false)}/>
+					</div>
+				)}
+				<h2>TODAY</h2>
+				<section className="today">
+					<CardLists tasks={tasksActive} isCreateFormShow={isCreateFormShow}/>
+				</section>
+				<section className="done">
+					<h2>DONE</h2>
+					<CardLists isStatus={true} tasks={completedTasks} isCreateFormShow={isCreateFormShow}/>
+				</section>
 				<div className="add-task-button">
 					<IconContext.Provider value={{className: "task-button", size: "0.75em"}}>
-						<Button type="button" onClick={createEditTask}>
+						<Button type="button" onClick={() => setIsCreateFormShow(true)}>
 							<FaPlus/>
 						</Button>
 					</IconContext.Provider>
 				</div>
-			
 			</Container>
-			{showModal &&
-				<Modal toggleModal={toggleModal}>
-					<AddTaskForm/>
-				</Modal>
-			}
 		</DashBoardContainer>
 	)
 }

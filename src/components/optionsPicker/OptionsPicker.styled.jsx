@@ -11,8 +11,27 @@ export const OptionsPickerContainer = styled.div`
     position: relative;
     display: flex;
     align-items: center;
-    //top: 25px;
-    //left: 0;
+    
+    .alert-enter {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    
+    .alert-enter-active {
+        opacity: 1;
+        transform: translateX(0);
+        transition: opacity 300ms, transform 300ms;
+    }
+    
+    .alert-exit {
+        opacity: 1;
+    }
+    
+    .alert-exit-active {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: opacity 300ms, transform 300ms;
+    }
     
     span[class*="color-selected"] {
         ${spanStyles}
@@ -34,7 +53,7 @@ export const OptionsPickerContainer = styled.div`
         li {
             display: flex;
             align-items: center;
-            text-transform: capitalize;
+            text-transform: uppercase;
             cursor: pointer;
             transition: color 0.4s cubic-bezier(0.2, 0.5, 0.5, 1);
             
@@ -69,15 +88,18 @@ export const OptionsPickerContainer = styled.div`
             content: '';
             position: absolute;
             right: ${(props) => {
-                return props.isCategoryChoice ? '6%' : "-10px"
+                return props.$isChoceCategory ? '6%' : "-10px"
             }};
-            top: ${(props) => props.isCategoryChoice ? "14px" : "10px"};
+            top: ${(props) => {
+                return props.$isChoceCategory ? "14px" : "10px"
+            }
+            };
             border: 5px solid transparent;
             border-top: 5px solid ${({theme}) => theme.colors.secondary};
         }
         
         &.active::after {
-            top: ${(props) => props.isCategoryChoice ? "9px" : "3px"};
+            top: ${(props) => props.$isChoceCategory ? "9px" : "3px"};
             transform: rotate(180deg);
             transition: transform 350ms cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -110,24 +132,27 @@ export const OptionsPickerContainer = styled.div`
         cursor: pointer;
     }
     
-    .popup-level-enter {
-        opacity: 0.5;
-        transform: scale(0.7);
+    .stuff {
+        background-color: #b9c3c8;
     }
     
-    .popup-level-enter-active {
-        opacity: 1;
-        transform: translateX(0);
-        transition: opacity 400ms, transform 400ms;
+    .family {
+        background-color: #ffe6d3;
     }
     
-    .popup-level-exit {
-        opacity: 1;
+    .health {
+        background-color: #cdf7ff;
     }
     
-    .popup-level-exit-active {
-        opacity: 0;
-        transform: scale(0.7);
-        transition: opacity 400ms, transform 400ms;
+    .learning {
+        background-color: #fff6c0;
+    }
+    
+    .leisure {
+        background-color: #f8d2ff;
+    }
+    
+    .work {
+        background-color: #d3f6ce;
     }
 `;

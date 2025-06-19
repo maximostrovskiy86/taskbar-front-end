@@ -6,11 +6,11 @@ import {PersistGate} from "redux-persist/integration/react";
 import {theme} from "./theme";
 import {persistor, store} from './redux/store';
 import App from './components/app';
+// import {UserProvider} from "./components/UserContext";
+
 
 import "normalize.css";
 import './index.css';
-
-
 
 
 
@@ -21,7 +21,9 @@ root.render(
 		<Provider store={store}>
 			<PersistGate persistor={persistor}>
 				<ThemeProvider theme={theme}>
-					<App/>
+					{/*<UserProvider>*/}
+						<App/>
+					{/*</UserProvider>*/}
 				</ThemeProvider>
 			</PersistGate>
 		</Provider>

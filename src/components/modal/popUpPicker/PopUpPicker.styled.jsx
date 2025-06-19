@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const OptionStylContainer = styled.div`
+
+`;
+
 export const BackDrop = styled.div`
     position: fixed;
     inset: 0;

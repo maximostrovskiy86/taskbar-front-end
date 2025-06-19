@@ -1,16 +1,15 @@
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {OptionsPickerContainer} from "./OptionsPicker.styled";
 import PopUpPicker from "../modal/popUpPicker/PopUpPicker";
-import {CSSTransition} from "react-transition-group";
 import Button from "../button";
-import {theme} from "../../theme";
+import UseAnimate from "../../hooks/UseAnimate";
 
 const DIFFICULTY_ARRAY = [
 	{name: "easy", color: "#00D7FF"},
 	{name: "normal", color: "#24D40C"},
 	{name: "hard", color: "#DB0837"},
 ];
-// const DIFFICULTY_ARRAY = ["easy", "normal", "hard"];
+
 const CATEGORY_ARRAY = [
 	{name: "stuff", color: "#b9c3c8"},
 	{name: "family", color: "#ffe6d3"},
@@ -21,30 +20,30 @@ const CATEGORY_ARRAY = [
 ]
 
 
-const OptionsPicker = ({onChoiceLevel, initialValue, isShowLevel, type}) => {
+const OptionsPicker = ({getOptionValue, initialValue, type}) => {
 	const [value, setValue] = useState(initialValue);
-	const [colorValue, setValueColor] = useState("#b9c3c8");
-	const [isShowCategory, seIsShowCategory] = useState(true);
 	const [showPopUp, setShowPopUp] = useState(false);
+	const nodeRef = useRef(null);
 	
 	const typeOptions = type === "level" ? DIFFICULTY_ARRAY : CATEGORY_ARRAY;
 	const isLevel = type === "level";
 	const isCategory = type === "category";
-	console.log("typeOptions")
-	const handleOptionsChange = (option) => {
-		console.log("e", option);
-		setValue(option.name);
-		setValueColor(option.color);
+	
+	const handleOptionsChange = ({name, color}) => {
+		setValue(name);
+		getOptionValue(name);
 		setShowPopUp(false);
 	}
 	
 	return (
-		<OptionsPickerContainer isCategoryChoice={isCategory}>
+		<OptionsPickerContainer $isChoceCategory={isCategory}>
 			{isLevel && <span className={`color-selected-${value}`}></span>}
-			<Button onClick={() => setShowPopUp(true)} className={isCategory ? `choice-category-btn ${showPopUp && "active"}` : `choice-level-btn ${showPopUp && "active"}`}
-					bg={colorValue} isCategoryChoice={isCategory}>{value}</Button>
-			{showPopUp && (
-				<PopUpPicker onClose={() => setShowPopUp(false)} className="popUp">
+			<Button onClick={() => setShowPopUp(true)}
+					className={isCategory ? `choice-category-btn ${showPopUp ? "active" : ""} ${initialValue}` : `choice-level-btn ${showPopUp ? "active" : ""}`}>
+				{value}
+			</Button>
+			<UseAnimate show={showPopUp} nodeRef={nodeRef} className="alert">
+				<PopUpPicker onClose={() => setShowPopUp(false)} showPopUp={showPopUp} ref={nodeRef} className="popUp">
 					{typeOptions &&
 						<ul className="option-list">
 							{typeOptions.map((option, index) => (
@@ -57,29 +56,8 @@ const OptionsPicker = ({onChoiceLevel, initialValue, isShowLevel, type}) => {
 						</ul>
 					}
 				</PopUpPicker>
-			)}
+			</UseAnimate>
 		</OptionsPickerContainer>
 	)
 }
-
-// <OptionsPickerContainer>
-// 	<CSSTransition
-// 		in={isShowModal}
-// 		nodeRef={nodeRef}
-// 		timeout={250}
-// 		classNames="popup-level"
-// 		unmountOnExit
-// 	>
-// 		<PopUpPicker ocClose={ocClose} ref={nodeRef}>
-// 			<ul className="level-list">
-// 				{DIFFICULTY_ARRAY.map((levelEl, index) => (
-// 					<li key={index} onClick={() => onChoiceLevel(levelEl)}>
-// 						<span style={{backgroundColor: `${levelEl.color}`}} className="label-color"></span>
-// 						{levelEl.level}
-// 					</li>
-// 				))}
-// 			</ul>
-// 		</PopUpPicker>
-// 	</CSSTransition>
-// </OptionsPickerContainer>
 export default OptionsPicker;

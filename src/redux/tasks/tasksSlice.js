@@ -1,8 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
 import tasksOperations from "./tasksOperations";
-// import authOperations from "../auth/authOperations";
-// import {getCurrentDate} from "../../helpers/getCurrentDay";
-
 
 const initialState = {
 	data: [],
@@ -10,17 +7,18 @@ const initialState = {
 	error: null,
 }
 
-
 const taskSlice = createSlice({
 	name: "tasks",
 	initialState,
 	extraReducers: builder => {
 		builder
+			
+			// GET ALL TASKS
 			.addCase(tasksOperations.getTasks.pending, (state, _) => {
 				state.isLoading = true;
 			})
 			.addCase(tasksOperations.getTasks.fulfilled, (state, action) => {
-				console.log("getTasks", action);
+				// console.log("tasks", action);
 				state.data = action.payload.data.tasks;
 				state.isLoading = false;
 				state.error = null;
@@ -30,35 +28,69 @@ const taskSlice = createSlice({
 				state.isLoading = false;
 			})
 			
-			
-			.addCase(tasksOperations.addTask.pending, (state, _) => {
+			// CREATE A NEW TASK
+			.addCase(tasksOperations.createTask.pending, (state, _) => {
 				state.isLoading = true;
 			})
-			.addCase(tasksOperations.addTask.fulfilled, (state, action) => {
-				console.log("addTask", action);
+			.addCase(tasksOperations.createTask.fulfilled, (state, action) => {
+				// console.log("tasks", action);
 				state.data = [...state.data, action.payload.data.task];
 				state.isLoading = false;
 				state.error = null;
 			})
-			.addCase(tasksOperations.addTask.rejected, (state, action) => {
+			.addCase(tasksOperations.createTask.rejected, (state, action) => {
 				state.error = action.payload;
 				state.isLoading = false;
 			})
-		
-		// .addCase(addUserProductByDay.pending, (state, _) => {
-		// 	state.isLoading = true;
-		// })
-		// .addCase(addUserProductByDay.fulfilled, (state, action) => {
-		// 	state.eatenProduct = action.payload.data.eatenProduct;
-		// 	state.day = action.payload.data.newDay ? action.payload.data.newDay : action.payload.data.day;
-		// 	state.day.daySummary = action.payload.data.newSummary ? action.payload.data.newSummary : action.payload.data.daySummary;
-		// 	state.isLoading = false;
-		// 	state.error = null;
-		// })
-		// .addCase(addUserProductByDay.rejected, (state, action) => {
-		// 	state.error = action.payload;
-		// 	state.isLoading = false;
-		// })
+			
+			//EDIT TASK
+			.addCase(tasksOperations.updateTask.pending, (state, _) => {
+				state.isLoading = true;
+			})
+			
+			.addCase(tasksOperations.updateTask.fulfilled, (state, action) => {
+				const index = state.data.findIndex(task => task._id === action.payload.data.task._id);
+				
+				state.data.splice(index, 1, action.payload.data.task);
+				// state.data[index] = action.payload.data.task; // second variant
+				state.isLoading = false;
+				state.error = null;
+			})
+			.addCase(tasksOperations.updateTask.rejected, (state, action) => {
+				state.error = action.payload;
+				state.isLoading = false;
+			})
+			
+			// DELETE TASK
+			.addCase(tasksOperations.deleteTask.pending, (state, _) => {
+				state.isLoading = true;
+			})
+			.addCase(tasksOperations.deleteTask.fulfilled, (state, action) => {
+				state.data = state.data.filter(task => task._id !== action.payload.data.task._id);
+				state.isLoading = false;
+				state.error = null;
+			})
+			.addCase(tasksOperations.deleteTask.rejected, (state, action) => {
+				state.error = action.payload;
+				state.isLoading = false;
+			})
+			
+			// UPDATE STATUS TASK
+			.addCase(tasksOperations.updateStatusTask.pending, (state, _) => {
+				state.isLoading = true;
+			})
+			.addCase(tasksOperations.updateStatusTask.fulfilled, (state, action) => {
+				console.log("ACTION", action)
+				const index = state.data.findIndex(task => task._id === action.payload.data.task._id);
+				state.data.splice(index, 1, action.payload.data.task);
+				
+				state.isLoading = false;
+				state.error = null;
+			})
+			.addCase(tasksOperations.updateStatusTask.rejected, (state, action) => {
+				state.error = action.payload;
+				state.isLoading = false;
+			})
 	}
 })
 

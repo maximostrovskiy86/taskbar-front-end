@@ -3,13 +3,12 @@ import axios from "axios";
 
 axios.defaults.baseURL = "http://localhost:8080/api";
 
-
 const getTasks = createAsyncThunk('tasks/getTasks',
 	async (credentials, thunkAPI) => {
 		try {
 			const response = await axios.get('/tasks');
 			// token.set(response.data.accessToken);
-			console.log("LoginUser", response);
+			// console.log("LoginUser", response);
 			
 			return response;
 		} catch (err) {
@@ -18,7 +17,8 @@ const getTasks = createAsyncThunk('tasks/getTasks',
 		}
 	});
 
-const addTask = createAsyncThunk('tasks/addTask',
+
+const createTask = createAsyncThunk('tasks/addTask',
 	async (credentials, thunkAPI) => {
 		
 		try {
@@ -32,9 +32,57 @@ const addTask = createAsyncThunk('tasks/addTask',
 	})
 
 
+const updateTask = createAsyncThunk('tasks/updateTask',
+	async (credentials, thunkAPI) => {
+		const {id} = credentials;
+		const {category, difficulty, taskDate, taskName} = credentials;
+		try {
+			
+			const response = await axios.put(`/tasks/${id}`, {category, difficulty, taskDate, taskName});
+			console.log("response", response);
+			
+			return response;
+		} catch (err) {
+			return thunkAPI.rejectWithValue(err);
+		}
+	})
+
+
+const deleteTask = createAsyncThunk('tasks/deleteTask',
+	async (id, thunkAPI) => {
+		
+		try {
+			const response = await axios.delete(`/tasks/${id}`,);
+			console.log("response", response);
+			
+			return response;
+		} catch (err) {
+			return thunkAPI.rejectWithValue(err);
+		}
+	})
+
+
+const updateStatusTask = createAsyncThunk('tasks/updateStatusTask',
+	async (credentials, thunkAPI) => {
+		const {id, completed} = credentials;
+		console.log("updateStatusTask", credentials);
+		try {
+			const response = await axios.patch(`/tasks/${id}/status`, {status: completed});
+			console.log("UPDATESTATUS", response);
+			
+			return response;
+		} catch (err) {
+			return thunkAPI.rejectWithValue(err);
+		}
+	})
+
+
 const tasksOperations = {
 	getTasks,
-	addTask,
+	createTask,
+	updateTask,
+	deleteTask,
+	updateStatusTask
 }
 
 export default tasksOperations;

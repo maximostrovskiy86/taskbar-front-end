@@ -1,28 +1,41 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import {CardContainer, CardHeader} from "../card/Card.styled";
 
-export const CreateEditContainer = styled(CardContainer)`
+const pseudoElementStyle = css`
+    content: '|';
+    position: absolute;
+    width: 2px;
+    height: 25px;
+    left: -1px;
+    color: ${({theme}) => theme.colors.gray};
+`;
 
+const transitionStyle = css`
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+`;
+
+export const CreateEditContainer = styled(CardContainer)`
+    position: relative;
 `;
 
 export const CreateEditHeaderCardContainer = styled(CardHeader)`
-
-        .color-selected-level {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            margin-right: 2px;
-            border-radius: 50%;
-        }
+    
+    .color-selected-level {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        margin-right: 2px;
+        border-radius: 50%;
+    }
 `;
 
 export const CardInput = styled.div`
-    margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     
-    input {
+    input#enter-title {
+        width: 80%;
         padding: 3px;
         border: none;
         outline: none;
@@ -42,6 +55,32 @@ export const ConfirmedCreateDeleteTask = styled.div`
     display: flex;
     align-items: center;
     
+    .modal-delete-enter {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    
+    .modal-delete-enter-active {
+        opacity: 1;
+        transform: translateX(0);
+        transition: opacity 300ms, transform 300ms;
+    }
+    
+    .modal-delete-exit {
+        opacity: 1;
+    }
+    
+    .modal-delete-exit-active {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: opacity 300ms, transform 300ms;
+    }
+    
+    
+    button {
+        ${transitionStyle};
+    }
+    
     .cancel-task {
         transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
         
@@ -55,19 +94,53 @@ export const ConfirmedCreateDeleteTask = styled.div`
         text-transform: uppercase;
         font-size: ${({theme}) => theme.fontSizes.md};;
         color: ${({theme}) => theme.colors.secondary};
-        transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-        
+        ${transitionStyle};
         &:hover {
             color: ${({theme}) => theme.colors.gray};
         }
         
         &:before {
-            content: '|';
-            position: absolute;
-            width: 2px;
-            height: 25px;
-            left: -1px;
-            color: ${({theme}) => theme.colors.gray};
+            ${pseudoElementStyle}
+        }
+    }
+    
+    h4.popUp-title {
+        font-weight: ${({theme}) => theme.fontWeights.normal};
+        font-size: ${({theme}) => theme.fontSizes.md};
+        
+    }
+    
+    .popUp-button-container {
+        margin-top: 10px;
+        display: flex;
+   
+        
+        button {
+            font-size: ${({theme}) => theme.fontSizes.sm};
+            text-transform: uppercase;
+            ${transitionStyle};
+        }
+        
+        button:first-of-type {
+            color: ${({theme}) => theme.colors.green};
+            &:hover {
+                color: ${({theme}) => theme.colors.gray};
+            }
+        }
+        
+        button:last-of-type {
+            position: relative;
+            color: ${({theme}) => theme.colors.red};
+            &:hover {
+                color: ${({theme}) => theme.colors.gray};
+            }
+            
+            &:before {
+                ${pseudoElementStyle};
+                height: 17px;
+                left: -3px;
+                
+            }
         }
     }
 `;

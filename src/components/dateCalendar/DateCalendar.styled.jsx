@@ -7,46 +7,32 @@ export const DiaryDateCalendarContainer = styled.div`
     justify-content: center;
     margin-top: 10px;
     
+    .date-picker-calendar {
+        svg {
+            fill: ${props => props.theme.colors.secondary} !important;
+        }
+    }
+    
     
     .datePicker {
+        width: 190px;
         font-weight: 400;
         font-size: 16px;
-        text-align: center;
+        //text-align: center;
         
         color: ${props => props.theme.colors.secondary};
-        
         border-color: transparent;
+        outline: none;
         cursor: pointer;
         
-		transform: translateX(-12px);
-        &:after {
-            content: "";
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            width: 30px;
-            height: 30px;
-            transform: translateY(-50%);
-            
-            background-image: url('../../images/calendar.svg');
-            
-        }
         
-        //content: '';
-        //position: absolute;
-        //top: 50%;
-        //right: 28px;
-        //width: 24px;
-        //height: 24px;
-        //transform: translateY(-50%);
-        //background-image: url('../images/fly.svg');
     }
     
     .datePickerLogo {
         position: absolute;
-		top: 2px;
-        right: 65px;
+        top: 0;
+        right: 23px;
         width: 20px;
-		height: 20px;
+        height: 20px;
     }
 `;

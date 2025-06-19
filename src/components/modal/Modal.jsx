@@ -5,7 +5,7 @@ import {IoMdClose} from "react-icons/io";
 
 const modalRoot = document.querySelector('#modal-root');
 
-const Modal = ({toggleModal, children}) => {
+const Modal = ({onClose, children}) => {
 	
 	useEffect(() => {
 		window.addEventListener("keydown", onCLoseModal);
@@ -21,13 +21,13 @@ const Modal = ({toggleModal, children}) => {
 	
 	const onCLoseModal = (e) => {
 		if (e.code === 'Escape') {
-			toggleModal();
+			onClose();
 		}
 	}
 	
 	const onOverlayClose = (e) => {
 		if (e.currentTarget === e.target) {
-			toggleModal();
+			onClose();
 		}
 	}
 	
@@ -36,7 +36,7 @@ const Modal = ({toggleModal, children}) => {
 			<ModalContent className="modal">
 				<div className="modal-header">
 					Create task
-					<IoMdClose onClick={toggleModal} fill="#ffffff" size={25} style={{cursor: "pointer"}}/>
+					<IoMdClose onClick={onClose} fill="#ffffff" size={25} style={{cursor: "pointer"}}/>
 				</div>
 				{children}
 			</ModalContent>
