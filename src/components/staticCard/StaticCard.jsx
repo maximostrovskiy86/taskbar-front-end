@@ -1,9 +1,10 @@
 import {StaticCardContainer, CategoryContainer, CardHeaderStyle} from "./StaticCard.styled";
-import { CardContainer } from "../card/Card.styled";
+import {CardContainer} from "../card/Card.styled";
 import {ReactComponent as Fire} from "../../images/fire.svg";
 import {ReactComponent as Star} from "../../images/star_blue.svg";
 
 const StaticCard = ({textPropName, difficultyProp, taskDate, categoryProp, onClick}) => {
+	// console.log("DATE", taskDate);
 	
 	return (
 		<CardContainer onClick={onClick} className="static-card">

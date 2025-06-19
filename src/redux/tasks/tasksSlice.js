@@ -1,8 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
 import tasksOperations from "./tasksOperations";
-// import authOperations from "../auth/authOperations";
-// import {getCurrentDate} from "../../helpers/getCurrentDay";
-
 
 const initialState = {
 	data: [],
@@ -10,12 +7,13 @@ const initialState = {
 	error: null,
 }
 
-
 const taskSlice = createSlice({
 	name: "tasks",
 	initialState,
 	extraReducers: builder => {
 		builder
+			
+			// GET ALL TASKS
 			.addCase(tasksOperations.getTasks.pending, (state, _) => {
 				state.isLoading = true;
 			})
@@ -30,7 +28,7 @@ const taskSlice = createSlice({
 				state.isLoading = false;
 			})
 			
-			
+			// CREATE A NEW TASK
 			.addCase(tasksOperations.createTask.pending, (state, _) => {
 				state.isLoading = true;
 			})
@@ -45,9 +43,11 @@ const taskSlice = createSlice({
 				state.isLoading = false;
 			})
 			
+			//EDIT TASK
 			.addCase(tasksOperations.updateTask.pending, (state, _) => {
 				state.isLoading = true;
 			})
+			
 			.addCase(tasksOperations.updateTask.fulfilled, (state, action) => {
 				const index = state.data.findIndex(task => task._id === action.payload.data.task._id);
 				
@@ -57,6 +57,20 @@ const taskSlice = createSlice({
 				state.error = null;
 			})
 			.addCase(tasksOperations.updateTask.rejected, (state, action) => {
+				state.error = action.payload;
+				state.isLoading = false;
+			})
+			
+			// DELETE TASK
+			.addCase(tasksOperations.deleteTask.pending, (state, _) => {
+				state.isLoading = true;
+			})
+			.addCase(tasksOperations.deleteTask.fulfilled, (state, action) => {
+				state.data = state.data.filter(task => task._id !== action.payload.data.task._id);
+				state.isLoading = false;
+				state.error = null;
+			})
+			.addCase(tasksOperations.deleteTask.rejected, (state, action) => {
 				state.error = action.payload;
 				state.isLoading = false;
 			})

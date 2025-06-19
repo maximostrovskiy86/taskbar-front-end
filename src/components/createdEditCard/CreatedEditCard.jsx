@@ -9,7 +9,7 @@ import {
 import OptionsPicker from "../optionsPicker";
 import DateCalendar from "../dateCalendar";
 import {ReactComponent as Star} from "../../images/star_blue.svg";
-import {ReactComponent as CancelCross} from "../../images/cancele-cross.svg";
+import {ReactComponent as DeleteTask} from "../../images/cancele-cross.svg";
 import {ReactComponent as DoneTask} from "../../images/done.svg";
 import {ReactComponent as UpdateTask} from "../../images/save.svg";
 import tasksOperations from "../../redux/tasks/tasksOperations"
@@ -28,7 +28,7 @@ const CreateEditCard = ({
 							taskDate,
 							handleHideCard,
 							isUpdateCard,
-							isDeleteCreatedTask,
+							isDeleteCreatingTask,
 							
 						}) => {
 	const dispatch = useDispatch();
@@ -77,7 +77,6 @@ const CreateEditCard = ({
 		setCategory("stuff");
 		setDifficulty("normal");
 	}
-	
 	const onHandleUpdateTask = (event) => {
 		console.log("e", event);
 		event.stopPropagation();
@@ -90,17 +89,31 @@ const CreateEditCard = ({
 			id: id
 		}
 		
-		// if (title === "") {
-		// 	handleError();
-		// 	return;
-		// }
+		if (taskName === "") {
+			handleError();
+			return;
+		}
 		
 		dispatch(tasksOperations.updateTask(updateDataTask));
 		handleHideCard(false);
 		
 		// setTitle("");
 	}
-	// console.log("TITLE", taskName)
+	
+	const onHandleDeleteTask = (id) => {
+		
+		if (!isUpdateCard) {
+			// console.log("-----", "IN")
+			setIsShowModal(false);
+			isDeleteCreatingTask(false);
+			return;
+		}
+		
+		// console.log("-----", "after")
+		dispatch(tasksOperations.deleteTask(id));
+		setIsShowModal(false);
+	}
+	
 	return (
 		<>
 			<CreateEditContainer className="create-edit-card">
@@ -123,14 +136,14 @@ const CreateEditCard = ({
 						{!isUpdateCard ? (
 							<>
 								<Button type="button" className="cancel-task"
-										onClick={() => setIsShowModal(true)}><CancelCross/></Button>
+										onClick={() => setIsShowModal(true)}><DeleteTask/></Button>
 								<Button type="submit" onClick={onHandleCreateTask}
 										className="create-task">Create</Button>
 							</>
 						) : (
 							<>
 								<Button type="button" onClick={onHandleUpdateTask}><UpdateTask/></Button>
-								<Button type="button"><CancelCross/></Button>
+								<Button type="submit" onClick={() => setIsShowModal(true)}><DeleteTask/></Button>
 								<Button type="button"><DoneTask/></Button>
 							</>
 						)}
@@ -140,7 +153,7 @@ const CreateEditCard = ({
 								<h4 className="popUp-title">Delete this quest?</h4>
 								<div className="popUp-button-container">
 									<Button onClick={() => setIsShowModal(false)}>Cancel</Button>
-									<Button onClick={isDeleteCreatedTask}>Delete</Button>
+									<Button onClick={() => onHandleDeleteTask(id)}>Delete</Button>
 								</div>
 							</PopUpConfirmCreateTask>
 						</UseAnimate>

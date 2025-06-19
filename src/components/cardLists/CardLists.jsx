@@ -8,11 +8,11 @@ const CardLists = ({isCreateFormShow = false, tasks, onCloseModal}) => {
 		<div>
 			{isCreateFormShow && (
 				<div className="cardListItem">
-					<CreateEditCard isDeleteCreatedTask={onCloseModal}/>
+					<CreateEditCard isDeleteCreatingTask={onCloseModal}/>
 				</div>
 			)}
 			{tasks && tasks.map((task) => {
-				return <Card key={task._id} task={task} />
+				return <Card key={task._id} task={task}/>
 			}).reverse()
 			}
 		</div>
