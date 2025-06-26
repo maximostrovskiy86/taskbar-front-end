@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-/*font-family: ${({ theme }) => theme.font.family};*/
-
 export const HeadTitleStyle = styled.h1`
     font-size: ${({ theme }) => theme.fontSizes.lg};
 	line-height: 26px;

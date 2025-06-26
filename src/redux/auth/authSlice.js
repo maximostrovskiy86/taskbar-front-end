@@ -8,14 +8,14 @@ import authOperations from "./authOperations";
 const authPersistConfig = {
 	key: 'auth',
 	storage,
-	// whitelist: ["refreshToken", "accessToken", "sid", 'isLoggedIn'],
+	whitelist: ["refreshToken", "accessToken", "sid", 'isLoggedIn'],
 }
 
 const initialState = {
 	accessToken: null,
 	refreshToken: null,
 	sid: null,
-	isLoggedIn: true,
+	isLoggedIn: false,
 	isLoading: false,
 	error: null,
 }
@@ -33,7 +33,7 @@ const handleRejected = (state, action) => {
 const authSlice = createSlice({
 	name: "auth",
 	initialState,
-		extraReducers: builder => {
+	extraReducers: builder => {
 		builder
 			// register reducer
 			// .addCase(authOperations.register.pending, (state, _) => {
@@ -75,11 +75,11 @@ const authSlice = createSlice({
 				state.error = null;
 			})
 			.addCase(authOperations.logOut.rejected, handleRejected)
-			
-			// .addCase(getCurrentUserInfo.fulfilled, (state, _) => {
-			// 	state.isLoggedIn = true;
-			// })
-		},
+		
+		// .addCase(getCurrentUserInfo.fulfilled, (state, _) => {
+		// 	state.isLoggedIn = true;
+		// })
+	},
 });
 
 export const authReducer = persistReducer(

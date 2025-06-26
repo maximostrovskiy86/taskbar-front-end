@@ -1,1 +1,1 @@
-export {default} from './RegistrationLoginForm';
+export {default} from './RegistrationForm';

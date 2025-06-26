@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {DashBoardContainer} from "./Dashboard.styled";
 import CardLists from "../../components/cardLists";
 import Container from "../../components/container";
+import Header from "../../components/header";
 import Button from "../../components/button";
 import {getAllActiveTasks, getAllCompletedTasks} from "../../redux/tasks/tasksSelectors";
 import {useEffect} from "react";
@@ -26,6 +27,7 @@ const Dashboard = () => {
 	return (
 		<DashBoardContainer>
 			<Container>
+				<Header/>
 				{isCreateFormShow && (
 					<div className="cardListItem">
 						<CreateEditCard isDeleteCreatingTask={() => setIsCreateFormShow(false)}/>

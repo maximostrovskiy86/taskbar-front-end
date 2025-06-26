@@ -3,7 +3,7 @@ import CreateEditCard from "../createdEditCard";
 
 
 const CardLists = ({isCreateFormShow = false, tasks}) => {
-	console.log("TASKCARDLIST", tasks);
+	// console.log("TASKCARDLIST", tasks);
 	return (
 		<div>
 			{/*{isCreateFormShow && !isStatus && (*/}

@@ -1,4 +1,7 @@
-export const getIsLoggedIn = state => state.auth.isLoggedIn;
+export const getIsLoggedIn = state => {
+	console.log("getIsLoggedIn", state);
+	return state.auth.isLoggedIn;
+}
 export const getUserName = state => state.auth.user.username;
 export const getUserSid = state => state.auth.sid;
 export const getAccessToken = state => state.auth.accessToken;
