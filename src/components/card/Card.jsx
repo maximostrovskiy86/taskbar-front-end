@@ -7,12 +7,10 @@ import {useState} from "react";
 const Card = ({task, isCreateFormShow}) => {
 	const [isUpdateCard, setIsUpdateCard] = useState(false);
 	const {difficulty, category, taskName, taskDate, _id, completed} = task;
-	
 	console.log("TASK", task)
 	
 	return (
-		<WrapperAnimate className={`card ${task._id}`}>
-			
+		<>
 			{isUpdateCard ? (
 				<CreateEditCard
 					difficultyProp={difficulty}
@@ -26,7 +24,6 @@ const Card = ({task, isCreateFormShow}) => {
 					handleHideCard={() => setIsUpdateCard(false)}
 				
 				/>
-			
 			) : (
 				<StaticCard
 					difficultyProp={difficulty}
@@ -43,8 +40,7 @@ const Card = ({task, isCreateFormShow}) => {
 					}}
 				/>
 			)}
-		
-		</WrapperAnimate>
+		</>
 	)
 }
 

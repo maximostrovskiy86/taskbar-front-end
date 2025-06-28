@@ -3,7 +3,7 @@ import CreateEditCard from "../createdEditCard";
 import {useState} from "react";
 
 
-const CardLists = ({isCreateFormShow = false, tasks}) => {
+const CardList = ({isCreateFormShow = false, tasks}) => {
 	// console.log("TASKCARDLIST", tasks);
 	const [isAnimate, setIsAnimate] = useState(false);
 	
@@ -22,4 +22,4 @@ const CardLists = ({isCreateFormShow = false, tasks}) => {
 	)
 }
 
-export default CardLists;
+export default CardList;

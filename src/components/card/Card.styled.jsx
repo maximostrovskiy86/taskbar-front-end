@@ -37,7 +37,7 @@ export const CardContainer = styled.div`
     
     border-radius: 15px;
 	cursor: pointer;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: -1px 1px 3px 4px rgba(0, 0, 0, 0.25);
     transition: all 300ms ease-in-out;
 	
 	&:hover {

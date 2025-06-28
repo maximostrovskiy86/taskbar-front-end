@@ -1,9 +1,8 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {DashBoardContainer} from "./Dashboard.styled";
-import CardLists from "../../components/cardLists";
+import CardList from "../../components/cardLists";
 import Container from "../../components/container";
-import Header from "../../components/header";
 import Button from "../../components/button";
 import {getAllActiveTasks, getAllCompletedTasks} from "../../redux/tasks/tasksSelectors";
 import {useEffect} from "react";
@@ -31,18 +30,19 @@ const Dashboard = () => {
 	return (
 		<DashBoardContainer>
 			<Container>
-				{isCreateFormShow && (
-					<div className="cardListItem">
-						<CreateEditCard isDeleteCreatingTask={() => setIsCreateFormShow(false)}/>
-					</div>
-				)}
-				<h2>TODAY</h2>
+				<h2>Today</h2>
 				<section className="today">
-					<CardLists tasks={tasksActive} isCreateFormShow={isCreateFormShow}/>
+					{isCreateFormShow && (
+						<CreateEditCard isDeleteCreatingTask={() => setIsCreateFormShow(false)}/>
+					)}
+					<CardList tasks={tasksActive} isCreateFormShow={isCreateFormShow}/>
+				</section>
+				<section>
+					<h2>Tomorrow</h2>
 				</section>
 				<section className="done">
-					<h2>DONE</h2>
-					<CardLists isStatus={true} tasks={completedTasks} isCreateFormShow={isCreateFormShow}/>
+					<h2>Done</h2>
+					<CardList isStatus={true} tasks={completedTasks} isCreateFormShow={isCreateFormShow}/>
 				</section>
 				<div className="add-task-button">
 					<IconContext.Provider value={{className: "task-button", size: "0.75em"}}>

@@ -1,7 +1,15 @@
 import styled from "styled-components";
 
 export const DashBoardContainer = styled.div`
-    .add-task-button {
+   padding-top: 20px;
+	
+    h2 {
+		margin-bottom: 20px;
+		text-transform: uppercase;
+		font-weight: 300;
+	}
+	
+	.add-task-button {
         position: fixed;
         bottom: 20px;
         right: 20px;
