@@ -1,6 +1,6 @@
 import {LandingContainer} from "./RegisterPage.styled";
 import Container from "../../components/container";
-import RegistrationForm from "../../components/registrationLoginForm";
+import RegistrationForm from "../../components/registrationForm";
 import HeadTitle from "../../components/headTitle";
 
 const RegisterPage = () => {

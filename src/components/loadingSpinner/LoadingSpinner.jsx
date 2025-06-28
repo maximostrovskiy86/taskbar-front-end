@@ -16,11 +16,11 @@ const LoadingSpinner = () => {
 			{/*	colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}*/}
 			{/*/>*/}
 			<DotLoader
-			color="#3febe6"
-			cssOverride={{}}
-			loading
-			size={60}
-			speedMultiplier={2}
+				color="#3febe6"
+				cssOverride={{}}
+				loading
+				size={60}
+				speedMultiplier={2}
 			/>
 		</SpinnerStyled>
 	)

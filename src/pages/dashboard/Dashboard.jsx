@@ -11,6 +11,7 @@ import tasksOperations from "../../redux/tasks/tasksOperations";
 import {FaPlus} from "react-icons/fa";
 import {IconContext} from "react-icons";
 import CreateEditCard from "../../components/createdEditCard";
+import {getAccessToken} from "../../redux/auth/authSelectors";
 
 
 const Dashboard = () => {
@@ -18,11 +19,14 @@ const Dashboard = () => {
 	
 	const dispatch = useDispatch();
 	const tasksActive = useSelector(getAllActiveTasks);
+	const token = useSelector(getAccessToken);
 	const completedTasks = useSelector(getAllCompletedTasks);
 	
 	useEffect(() => {
-		dispatch(tasksOperations.getTasks())
-	}, [dispatch])
+		if (token) {
+			dispatch(tasksOperations.getTasks())
+		}
+	}, [dispatch, token])
 	
 	return (
 		<DashBoardContainer>

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { LoginInputBox } from "../registrationLoginForm/RegistrationForm.styled";
+import { LoginInputBox } from "../registrationForm/RegistrationForm.styled";
 
 export const LoginFormContainer = styled.form`
     display: flex;
