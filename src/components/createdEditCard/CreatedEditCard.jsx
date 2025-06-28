@@ -15,7 +15,7 @@ import {ReactComponent as UpdateTask} from "../../images/save.svg";
 import tasksOperations from "../../redux/tasks/tasksOperations"
 import Button from "../button";
 import PopUpConfirmCreateTask from "../popUpConfirmCreateTask";
-import UseAnimate from "../../hooks/UseAnimate";
+import Animate from "../animate/Animate";
 import {toast} from "react-toastify";
 
 
@@ -155,7 +155,7 @@ const CreateEditCard = ({
 							</>
 						)}
 						
-						<UseAnimate show={isShowModal} nodeRef={nodeRef} className="modal-delete">
+						<Animate show={isShowModal} nodeRef={nodeRef} className="modal-delete">
 							<PopUpConfirmCreateTask onClose={() => setIsShowModal(false)} ref={nodeRef}>
 								<h4 className="popUp-title">Delete this quest?</h4>
 								<div className="popUp-button-container">
@@ -163,7 +163,7 @@ const CreateEditCard = ({
 									<Button onClick={() => onHandleDeleteTask(id)}>Delete</Button>
 								</div>
 							</PopUpConfirmCreateTask>
-						</UseAnimate>
+						</Animate>
 					</ConfirmedCreateDeleteTask>
 				</FooterEditCardContainer>
 			</CreateEditContainer>

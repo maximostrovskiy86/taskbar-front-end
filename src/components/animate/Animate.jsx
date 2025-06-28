@@ -1,6 +1,6 @@
 import {CSSTransition} from 'react-transition-group'
 
-const UseAnimate = ({children, nodeRef, show, className}) => {
+const Animate = ({children, nodeRef, show, className}) => {
 	return (
 		<CSSTransition
 			in={show}
@@ -14,4 +14,4 @@ const UseAnimate = ({children, nodeRef, show, className}) => {
 	)
 }
 
-export default UseAnimate;
+export default Animate;

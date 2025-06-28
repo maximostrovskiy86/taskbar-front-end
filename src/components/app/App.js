@@ -6,18 +6,20 @@ import NotFoundPage from "../../pages/notFound";
 import RegisterPage from "../../pages/registerPage";
 import LoginPage from "../../pages/loginPage";
 import LoadingSpinner from "../loadingSpinner";
-import {getIsLoading} from "../../redux/auth/authSelectors";
+import {getIsLoading, getIsLoggedIn} from "../../redux/auth/authSelectors";
 import PrivateRoute from "../routes/PrivateRoute";
 import PublicRoute from "../routes/PublicRoute";
+import Header from "../header";
 
 // import {UserMenu} from "../UserMenu";
 
-
 function App() {
 	const isLoading = useSelector(getIsLoading);
+	const isLoggedIn = useSelector(getIsLoggedIn);
 	
 	return (
 		<>
+			{isLoggedIn && <Header/>}
 			{isLoading ? <LoadingSpinner/> :
 				<Routes>
 					{/*<UserMenu/>*/}

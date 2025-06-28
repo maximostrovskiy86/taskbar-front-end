@@ -31,7 +31,6 @@ const Dashboard = () => {
 	return (
 		<DashBoardContainer>
 			<Container>
-				<Header/>
 				{isCreateFormShow && (
 					<div className="cardListItem">
 						<CreateEditCard isDeleteCreatingTask={() => setIsCreateFormShow(false)}/>
