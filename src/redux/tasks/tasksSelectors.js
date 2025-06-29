@@ -12,3 +12,10 @@ export const getAllCompletedTasks = (state) => {
 		return  task.completed
 	})
 };
+
+export const getUnusedTasks = (state) => {
+	return state.tasks.data.filter(({ completed, taskDate }) => {
+		console.log("TASKCOMPLETED", taskDate)
+		return !completed && new Date().getTime() > new Date(taskDate).getTime();
+	});
+};

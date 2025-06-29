@@ -4,13 +4,13 @@ import CreateEditCard from "../createdEditCard";
 import {useState} from "react";
 
 
-const CardList = ({isCreateFormShow = false, tasks, onCloseModal}) => {
+const CardList = ({isCreateFormShow = false, tasks, onCloseModal, isVisible = false}) => {
 	// console.log("TASKCARDLIST", tasks);
 	const [isAnimate, setIsAnimate] = useState(false);
 	
 	return (
 		<CardListContainer>
-			{isCreateFormShow && (
+			{isCreateFormShow && isVisible && (
 				<li className="card-list-item">
 					<CreateEditCard isDeleteCreatingTask={onCloseModal}/>
 				</li>
