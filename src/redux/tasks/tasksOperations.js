@@ -3,8 +3,26 @@ import axios from "axios";
 
 axios.defaults.baseURL = "http://localhost:8080/api";
 
+const token = {
+	set(token) {
+		axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+	},
+	unset() {
+		axios.defaults.headers.common.Authorization = "";
+	},
+};
+
 const getTasks = createAsyncThunk('tasks/getTasks',
 	async (credentials, thunkAPI) => {
+		const state = thunkAPI.getState();
+		const persistedToken = state.auth.accessToken;
+		
+		if (persistedToken === null) {
+			return thunkAPI.rejectWithValue(undefined);
+		}
+		
+		token.set(persistedToken);
+		
 		try {
 			const response = await axios.get('/tasks');
 			// token.set(response.data.accessToken);

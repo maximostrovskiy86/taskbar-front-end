@@ -1,31 +1,20 @@
 import {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {DashBoardContainer} from "./Dashboard.styled";
 import CardList from "../../components/cardLists";
 import Container from "../../components/container";
 import Button from "../../components/button";
 import {getAllActiveTasks, getAllCompletedTasks} from "../../redux/tasks/tasksSelectors";
-import {useEffect} from "react";
-import tasksOperations from "../../redux/tasks/tasksOperations";
 import {FaPlus} from "react-icons/fa";
 import {IconContext} from "react-icons";
 import CreateEditCard from "../../components/createdEditCard";
-import {getAccessToken} from "../../redux/auth/authSelectors";
+
 
 
 const Dashboard = () => {
 	const [isCreateFormShow, setIsCreateFormShow] = useState(true);
-	
-	const dispatch = useDispatch();
 	const tasksActive = useSelector(getAllActiveTasks);
-	const token = useSelector(getAccessToken);
 	const completedTasks = useSelector(getAllCompletedTasks);
-	
-	useEffect(() => {
-		if (token) {
-			dispatch(tasksOperations.getTasks())
-		}
-	}, [dispatch, token])
 	
 	return (
 		<DashBoardContainer>
