@@ -32,10 +32,10 @@ const Dashboard = () => {
 			<Container>
 				<h2>Today</h2>
 				<section className="today">
-					{isCreateFormShow && (
-						<CreateEditCard isDeleteCreatingTask={() => setIsCreateFormShow(false)}/>
-					)}
-					<CardList tasks={tasksActive} isCreateFormShow={isCreateFormShow}/>
+					{/*{isCreateFormShow && (*/}
+					{/*	<CreateEditCard isDeleteCreatingTask={() => setIsCreateFormShow(false)}/>*/}
+					{/*)}*/}
+					<CardList tasks={tasksActive} onCloseModal={() => setIsCreateFormShow(false)} isCreateFormShow={isCreateFormShow}/>
 				</section>
 				<section>
 					<h2>Tomorrow</h2>

@@ -36,11 +36,11 @@ export const CardContainer = styled.div`
     color: ${({theme}) => theme.colors.text};
     
     border-radius: 15px;
-	cursor: pointer;
+    cursor: pointer;
     box-shadow: -1px 1px 3px 4px rgba(0, 0, 0, 0.25);
     transition: all 300ms ease-in-out;
-	
-	&:hover {
+    
+    &:hover {
         box-shadow: 4px 0 8px 2px rgba(0, 0, 0, 0.25);
         
     }
