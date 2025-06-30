@@ -50,10 +50,3 @@ ul {
 a {
     text-decoration: none;
 }
-
-.landing {
-    background-image: url("images/LandingBg.png");
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-size: contain;
-}

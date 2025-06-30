@@ -55,6 +55,10 @@ const RegistrationForm = () => {
 		}
 		
 		notifyExistsUser(response.meta.arg.email);
+		
+		setTimeout(() => {
+			navigate("/login", {replace: true});
+		}, 1500)
 	}
 	
 	const resetForm = () => {
