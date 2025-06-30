@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const HeaderStyle = styled.header`
     height: 60px;
-    background-color: ${({theme}) => theme.colors.accent};
+    background-color: ${({theme}) => theme.colors.primary};
 	
 	.container {
 		height: 100%;
@@ -14,6 +14,12 @@ export const HeaderStyle = styled.header`
 .nav {
     display: flex;
     align-items: center;
+    margin-left: auto;
+    
+    @media screen and (min-width: 767px){
+		margin: 0;
+    }
+    
     
     button {
         background-color: transparent;
@@ -28,24 +34,26 @@ export const HeaderStyle = styled.header`
         }
     }
     
-    .nameIcon {
+    .header-user-name {
+		display: flex;
+		width: 30px;
+		height: 30px;
+        margin-right: 10px;
+        
+        background-color: #3E4E6C;
+        color: ${({theme}) => theme.colors.white};
+		border-radius: 50%;
         cursor: pointer;
-		margin-right: 10px;
+		
+		span {
+            margin: auto;
+        }
     }
 	
-	.cup {
-		cursor: pointer;
-		margin-right: 10px;
+	.full-user-name {
+		font-size: ${({theme}) => theme.fontSizes.md};
+		font-weight: 300;
+		color: #7B8AA4;
 	}
-    
-    .logOutButton {
-        width: 20px;
-        height: 20px;
-		fill: #3E4E6C;
-		
-		&:active {
-			fill: white;
-		}
-    }
 }
 `;
