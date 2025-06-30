@@ -1,22 +1,22 @@
-import React, {useState} from "react";
+import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {HeaderStyle} from "./Header.styled";
 import HeadTitle from "../headTitle";
 import {RiLogoutCircleRLine} from "react-icons/ri";
-import {ReactComponent as Cup} from "../../images/trophy.svg";
-import {ReactComponent as NameIcon} from "../../images/nameIcon.svg";
 import Button from "../button";
 import Container from "../container";
 import authOperations from "../../redux/auth/authOperations";
-import {getIsLoggedIn} from "../../redux/auth/authSelectors";
+import {getIsLoggedIn, getUserName} from "../../redux/auth/authSelectors";
+import {useMediaPredicate} from "react-media-hook";
+
 
 
 const Header = () => {
 	const dispatch = useDispatch();
-	const isLoggedIn = useSelector(getIsLoggedIn);
+	const userName = useSelector(getUserName);
+	const moreThan768 = useMediaPredicate("(min-width: 767px)");
 	
 	const onLogout = async () => {
-		console.log("logout", isLoggedIn);
 		await dispatch(authOperations.logOut())
 	}
 	
@@ -27,12 +27,14 @@ const Header = () => {
 					Questify
 				</HeadTitle>
 				<div className="nav">
-					<NameIcon className="nameIcon"/>
-					<Cup className="cup"/>
-					<Button onClick={onLogout}>
-						<RiLogoutCircleRLine className="logOutButton"/>
-					</Button>
+					<div className="header-user-name">
+						<span>{userName.slice(0, 1).toUpperCase()}</span>
+					</div>
+					<span className="full-user-name">{moreThan768 && userName}</span>
 				</div>
+				<Button onClick={onLogout}>
+					<RiLogoutCircleRLine color="3E4E6C" size="1.5rem" className="log-out-button"/>
+				</Button>
 			</Container>
 		</HeaderStyle>
 	)

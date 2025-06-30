@@ -6,7 +6,7 @@ import authOperations from "./authOperations";
 const authPersistConfig = {
 	key: 'auth',
 	storage,
-	whitelist: ["accessToken", 'isLoggedIn'],
+	whitelist: ["accessToken", 'isLoggedIn', 'user'],
 }
 
 const initialState = {
@@ -14,6 +14,7 @@ const initialState = {
 	isLoggedIn: false,
 	isLoading: false,
 	error: null,
+	user: null,
 }
 
 const handlePending = state => {
@@ -35,7 +36,7 @@ const authSlice = createSlice({
 				state.isLoading = true;
 			})
 			.addCase(authOperations.register.fulfilled, (state, action) => {
-				state.user = action.payload;
+				state.user = action.payload.data.user;
 				state.isLoggedIn = false;
 				state.isLoading = false;
 				state.error = null;
@@ -48,6 +49,7 @@ const authSlice = createSlice({
 			// login reducer
 			.addCase(authOperations.login.pending, handlePending)
 			.addCase(authOperations.login.fulfilled, (state, action) => {
+				state.user = action.payload.data.user;
 				state.accessToken = action.payload.data.accessToken;
 				state.isLoggedIn = true;
 				state.isLoading = false;
@@ -58,6 +60,7 @@ const authSlice = createSlice({
 			// logOut reducer
 			.addCase(authOperations.logOut.pending, handlePending)
 			.addCase(authOperations.logOut.fulfilled, (state, action) => {
+				state.user = null;
 				state.accessToken = null;
 				state.isLoggedIn = false;
 				state.isLoading = false;
