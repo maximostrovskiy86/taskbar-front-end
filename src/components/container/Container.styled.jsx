@@ -6,7 +6,4 @@ export const StyleContainer = styled.div`
     margin-right: auto;
     padding-left: 15px;
     padding-right: 15px;
-    //display: flex;
-    //flex-direction: column;
-    //align-items: center;
 `;

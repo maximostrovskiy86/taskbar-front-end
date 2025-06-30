@@ -6,8 +6,6 @@ import Container from "../../components/container";
 import Button from "../../components/button";
 import {getAllActiveTasks, getAllCompletedTasks, getUnusedTasks} from "../../redux/tasks/tasksSelectors";
 import {FaPlus} from "react-icons/fa";
-import {IconContext} from "react-icons";
-
 
 const Dashboard = () => {
 	const [isCreateFormShow, setIsCreateFormShow] = useState(true);
@@ -36,11 +34,9 @@ const Dashboard = () => {
 					<CardList tasks={completedTasks}/>
 				</section>
 				<div className="add-task-button">
-					<IconContext.Provider value={{className: "task-button", size: "0.75em"}}>
-						<Button type="button" onClick={() => setIsCreateFormShow(true)}>
-							<FaPlus/>
-						</Button>
-					</IconContext.Provider>
+					<Button type="button" onClick={() => setIsCreateFormShow(true)}>
+						<FaPlus size="1.25rem"/>
+					</Button>
 				</div>
 			</Container>
 		</DashBoardContainer>
