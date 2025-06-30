@@ -1,3 +1,4 @@
+import "./App.css";
 import {useDispatch, useSelector} from "react-redux";
 import {Routes, Route} from "react-router-dom";
 import {ToastContainer} from 'react-toastify';
@@ -33,19 +34,22 @@ function App() {
 		<>
 			{isLoggedIn && <Header/>}
 			{isLoading ? <LoadingSpinner/> :
-				<Routes>
+				<main className="main">
 					{/*<UserMenu/>*/}
-					<Route path="/"
-						   element={<PrivateRoute redirectTo="/login" component={<Dashboard/>}/>}/>
-					<Route path="/login"
-						   element={<PublicRoute redirectTo="/dashboard" component={<LoginPage/>}/>}/>
-					<Route path="/registration"
-						   element={<PublicRoute redirectTo="/dashboard" component={<RegisterPage/>}/>}/>
-					<Route path="/dashboard"
-						   element={<PrivateRoute redirectTo="/login" component={<Dashboard/>}/>}
-					/>
-					<Route path="*" element={<NotFoundPage/>}/>
-				</Routes>
+					<Routes>
+						
+						<Route path="/"
+							   element={<PrivateRoute redirectTo="/login" component={<Dashboard/>}/>}/>
+						<Route path="/login"
+							   element={<PublicRoute redirectTo="/dashboard" component={<LoginPage/>}/>}/>
+						<Route path="/registration"
+							   element={<PublicRoute redirectTo="/dashboard" component={<RegisterPage/>}/>}/>
+						<Route path="/dashboard"
+							   element={<PrivateRoute redirectTo="/login" component={<Dashboard/>}/>}
+						/>
+						<Route path="*" element={<NotFoundPage/>}/>
+					</Routes>
+				</main>
 			}
 			<ToastContainer/>
 		</>

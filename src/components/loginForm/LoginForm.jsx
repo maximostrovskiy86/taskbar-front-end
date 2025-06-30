@@ -81,8 +81,8 @@ const LoginForm = () => {
 				/>
 				<label htmlFor="password">Password</label>
 			</InputBox>
-			<Button>Go!</Button>
 			<p>Don't have an account? You can <strong><Link to="/registration">register</Link></strong></p>
+			<Button>Go!</Button>
 		</LoginFormContainer>
 	)
 }

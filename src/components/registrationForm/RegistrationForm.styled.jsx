@@ -1,10 +1,7 @@
 import styled from 'styled-components';
 
 export const RegistrationLoginFormContainer = styled.form`
-    display: flex;
-    flex-direction: column;
-	align-items: center;
-    
+	
     button {
         width: 52px;
         height: 52px;
@@ -25,6 +22,10 @@ export const RegistrationLoginFormContainer = styled.form`
         &:hover {
             transform: scale(1.05);
         }
+    }
+    
+    @media screen and (min-width: 767px) {
+        align-items: start;
     }
 `;
 
@@ -50,15 +51,14 @@ export const LoginInputBox = styled.div`
     }
     
     input {
-        width: 210px;
+        max-width: 280px;
         padding: 15px 0;
-        margin-right: 30px;
         
         font-size: ${p => p.theme.fontSizes.md};
         
         color: ${p => p.theme.colors.secondary};
         border: ${p => p.theme.borders.none};
-        border-bottom: ${p => p.theme.borders.medium} solid ${p => p.theme.colors.primary};
+        border-bottom: ${p => p.theme.borders.medium} solid ${p => p.theme.colors.secondary};
         outline: none;
         
         &:focus ~ label {

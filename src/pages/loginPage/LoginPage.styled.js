@@ -1,7 +1,13 @@
 import styled from "styled-components";
+import bgImg from "../../images/LandingBg.png";
+import bgTablet from "../../images/tablet-bg.png";
+import bgDesktop from "../../images/desktop-bg.png";
+import {LandingContainer} from "../registerPage/RegisterPage.styled";
 
-export const LoginPageContainer = styled.div`
-    padding-top: 94px;
+export const LoginPageContainer = styled(LandingContainer)`
+    p {
+        font-size: 18px;
+    }
     
     button {
         width: 52px;
@@ -27,12 +33,14 @@ export const LoginPageContainer = styled.div`
     
     h1 {
         padding: ${p => p.theme.spacing[0]};
-        color: ${p => p.theme.colors.accent};
+        font-weight: 300;
+        text-align: center;
+        color: ${p => p.theme.colors.buttonBg};
     }
     
-    @media screen and (max-width: 767px) {
+    @media screen and (min-width: 767px) {
         h1 {
-            text-align: center;
+            text-align: left;
         }
     }
 `;
