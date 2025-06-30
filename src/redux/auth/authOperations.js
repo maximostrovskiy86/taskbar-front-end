@@ -1,7 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://slimmom-backend.goit.global";
+axios.defaults.baseURL = "http://localhost:8080/api";
 
 const token = {
 	set(token) {
@@ -12,10 +12,10 @@ const token = {
 	},
 };
 
-const register = createAsyncThunk('auth/register',
+const register = createAsyncThunk('auth/registration',
 	async (credentials, thunkAPI) => {
 		try {
-			return await axios.post('/auth/register', credentials);
+			return await axios.post('/auth/registration', credentials);
 			
 		} catch (err) {
 			return thunkAPI.rejectWithValue(err.message);
@@ -27,11 +27,9 @@ const login = createAsyncThunk('auth/login',
 		try {
 			const response = await axios.post('/auth/login', credentials);
 			token.set(response.data.accessToken);
-			// console.log("LoginUser", response);
 			
 			return response;
 		} catch (err) {
-			// console.log("LoginErrror", err);
 			return thunkAPI.rejectWithValue(err);
 		}
 	});
@@ -39,36 +37,28 @@ const login = createAsyncThunk('auth/login',
 const logOut = createAsyncThunk('auth/logout',
 	async (_, thunkAPI) => {
 		try {
-			const response = await axios.post('/auth/logout');
-			// console.log("response.data.accessToken", response)
+			// const response = await axios.post('/auth/logout');
 			token.unset();
-			return response;
+			// return response;
 		} catch (err) {
 			return thunkAPI.rejectWithValue(err.message);
 		}
 	})
 
-// const refreshToken = createAsyncThunk('auth/refresh',
+// const authCurrentUserRefresh = createAsyncThunk('auth/refresh',
 // 	async (_, thunkAPI) => {
-//
 // 		const state = thunkAPI.getState();
-// 		console.log("stateAuth", state)
-// 		const persistSid = state.auth.sid;
-// 		const persistRefreshToken = state.auth.refreshToken;
+// 		const persistedToken = state.auth.accessToken;
 //
-// 		if (persistRefreshToken === null) {
-// 			return;
+// 		if (persistedToken === null) {
+// 			return thunkAPI.rejectWithValue(undefined);
 // 		}
-// 		console.log("Sid", state.auth.sid)
-// 		console.log("RefreshToken", state.auth)
 //
-// 		token.set(persistRefreshToken);
+// 		token.set(persistedToken);
 // 		try {
-// 			const response = await axios.post('/auth/refresh', {sid: persistSid});
-// 			console.log("persistTokenSid", response)
-// 			return response;
+// 			return await axios.get(`/tasks`);
 // 		} catch (err) {
-// 			return thunkAPI.rejectWithValue(err.message);
+// 			return thunkAPI.rejectWithValue(err);
 // 		}
 // 	})
 
@@ -76,8 +66,8 @@ const authOperations = {
 	register,
 	login,
 	logOut,
-	// refreshToken,
-	token
+	token,
+	// authCurrentUserRefresh
 }
 
 export default authOperations;

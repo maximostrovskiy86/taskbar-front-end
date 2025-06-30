@@ -2,7 +2,7 @@ import {useRef, useState} from "react";
 import {OptionsPickerContainer} from "./OptionsPicker.styled";
 import PopUpPicker from "../modal/popUpPicker/PopUpPicker";
 import Button from "../button";
-import UseAnimate from "../../hooks/UseAnimate";
+import Animate from "../animate/Animate";
 
 const DIFFICULTY_ARRAY = [
 	{name: "easy", color: "#00D7FF"},
@@ -42,7 +42,7 @@ const OptionsPicker = ({getOptionValue, initialValue, type}) => {
 					className={isCategory ? `choice-category-btn ${showPopUp ? "active" : ""} ${initialValue}` : `choice-level-btn ${showPopUp ? "active" : ""}`}>
 				{value}
 			</Button>
-			<UseAnimate show={showPopUp} nodeRef={nodeRef} className="alert">
+			<Animate show={showPopUp} nodeRef={nodeRef} className="alert">
 				<PopUpPicker onClose={() => setShowPopUp(false)} showPopUp={showPopUp} ref={nodeRef} className="popUp">
 					{typeOptions &&
 						<ul className="option-list">
@@ -56,7 +56,7 @@ const OptionsPicker = ({getOptionValue, initialValue, type}) => {
 						</ul>
 					}
 				</PopUpPicker>
-			</UseAnimate>
+			</Animate>
 		</OptionsPickerContainer>
 	)
 }

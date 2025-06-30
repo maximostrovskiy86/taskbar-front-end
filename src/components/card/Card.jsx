@@ -1,15 +1,16 @@
+import {WrapperAnimate} from "./Card.styled";
 import StaticCard from "../staticCard";
 import CreateEditCard from "../createdEditCard";
 import {useState} from "react";
 
 
-const Card = ({task}) => {
+const Card = ({task, isCreateFormShow}) => {
 	const [isUpdateCard, setIsUpdateCard] = useState(false);
-	// console.log("TASK", task);
 	const {difficulty, category, taskName, taskDate, _id, completed} = task;
+	console.log("TASK", task)
 	
 	return (
-		<div className={`card ${task._id}`}>
+		<>
 			{isUpdateCard ? (
 				<CreateEditCard
 					difficultyProp={difficulty}
@@ -20,7 +21,9 @@ const Card = ({task}) => {
 					isCompleted={completed}
 					
 					isUpdateCard={isUpdateCard}
-					handleHideCard={() => setIsUpdateCard(false)}/>
+					handleHideCard={() => setIsUpdateCard(false)}
+				
+				/>
 			) : (
 				<StaticCard
 					difficultyProp={difficulty}
@@ -37,7 +40,7 @@ const Card = ({task}) => {
 					}}
 				/>
 			)}
-		</div>
+		</>
 	)
 }
 

@@ -1,9 +1,9 @@
-import {LandingContainer} from "./Landing.styled";
+import {LandingContainer} from "./RegisterPage.styled";
 import Container from "../../components/container";
-import RegistrationLoginForm from "../../components/registrationLoginForm";
+import RegistrationForm from "../../components/registrationForm";
 import HeadTitle from "../../components/headTitle";
 
-const Landing = () => {
+const RegisterPage = () => {
 	return (
 		<LandingContainer className="landing">
 			<Container>
@@ -12,10 +12,10 @@ const Landing = () => {
 				</HeadTitle>
 				<p>Questify will turn your life into a thrilling game full of amazing quests and exciting
 					challenges.</p>
-				<RegistrationLoginForm/>
+				<RegistrationForm/>
 			</Container>
 		</LandingContainer>
 	)
 }
 
-export default Landing;
+export default RegisterPage;

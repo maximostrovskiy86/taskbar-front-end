@@ -1,8 +1,32 @@
 import styled from 'styled-components';
 
 export const RegistrationLoginFormContainer = styled.form`
-	display: flex;
-	justify-content: flex-start;
+	
+    button {
+        width: 52px;
+        height: 52px;
+        margin-top: 15px;
+        
+        font-weight: ${props => props.theme.fontWeights.bold};
+        font-size: ${props => props.theme.fontSizes.md};
+        line-height: ${props => props.theme.lineHeights.medium};
+        background-color: ${props => props.theme.colors.buttonBg};
+        color: ${props => props.theme.colors.white};
+        border-radius: ${props => props.theme.borderRadius.round};
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+        
+        &:active {
+            background-color: #f37820;
+        }
+        
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+    
+    @media screen and (min-width: 767px) {
+        align-items: start;
+    }
 `;
 
 export const LoginInputBox = styled.div`
@@ -10,7 +34,7 @@ export const LoginInputBox = styled.div`
 	
     label {
         position: absolute;
-        top: -35px;
+        top: -1px;
         left: 0;
         padding: 10px 0;
 		width: 260px;
@@ -20,26 +44,25 @@ export const LoginInputBox = styled.div`
         line-height: ${p => p.theme.lineHeights.medium};
         letter-spacing: 0.04em;
         
-        color: ${p => p.theme.colors.gray};
+        color: ${p => p.theme.colors.secondary};
         
         pointer-events: none;
         transition: ${p => p.theme.durations.ms500};
     }
     
     input {
-        width: 210px;
+        max-width: 280px;
         padding: 15px 0;
-        margin-right: 30px;
         
         font-size: ${p => p.theme.fontSizes.md};
         
         color: ${p => p.theme.colors.secondary};
         border: ${p => p.theme.borders.none};
-        border-bottom: ${p => p.theme.borders.medium} solid ${p => p.theme.colors.primary};
+        border-bottom: ${p => p.theme.borders.medium} solid ${p => p.theme.colors.secondary};
         outline: none;
         
         &:focus ~ label {
-            top: -22px;
+            top: -5px;
             left: 0;
             color: ${p => p.theme.colors.accent};
             font-size: ${p => p.theme.fontSizes.xs};
