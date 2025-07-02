@@ -1,21 +1,32 @@
-export const getAllActiveTasks = state => {
-	// console.log("SATTE", state)
-	
-	return state.tasks.data.filter(task => !task.completed)
-};
+export const getActiveTodayTasks = (state) =>
+	state.tasks.data.filter(task => {
+		return (
+			!task.completed &&
+			new Date().getTime() < new Date(task.taskDate).getTime() &&
+			new Date().toLocaleDateString() ===
+			new Date(task.taskDate).toLocaleDateString()
+		);
+	});
 
 export const getAllCompletedTasks = (state) => {
-	console.log("SATTE", state)
 	return state.tasks.data.filter(task => {
-		console.log("TASKCOMPLETED", task);
 		
-		return  task.completed
+		return task.completed
 	})
 };
 
 export const getUnusedTasks = (state) => {
-	return state.tasks.data.filter(({ completed, taskDate }) => {
-		console.log("TASKCOMPLETED", taskDate)
+	return state.tasks.data.filter(({completed, taskDate}) => {
 		return !completed && new Date().getTime() > new Date(taskDate).getTime();
 	});
 };
+
+export const getActiveTomorrowTasks = (state) =>
+	state.tasks.data.filter(({completed, taskDate}) => {
+			return (
+				!completed &&
+				new Date().getTime() < new Date(taskDate).getTime() &&
+				new Date().getDate() + 1 === new Date(taskDate).getDate()
+			)
+		}
+	)

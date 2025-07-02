@@ -1,10 +1,9 @@
-import {WrapperAnimate} from "./Card.styled";
 import StaticCard from "../staticCard";
 import CreateEditCard from "../createdEditCard";
 import {useState} from "react";
 
 
-const Card = ({task, isCreateFormShow}) => {
+const Card = ({task}) => {
 	const [isUpdateCard, setIsUpdateCard] = useState(false);
 	const {difficulty, category, taskName, taskDate, _id, completed} = task;
 	console.log("TASK", task)

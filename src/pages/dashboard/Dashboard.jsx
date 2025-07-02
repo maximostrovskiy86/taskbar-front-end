@@ -4,34 +4,64 @@ import {DashBoardContainer} from "./Dashboard.styled";
 import CardList from "../../components/cardLists";
 import Container from "../../components/container";
 import Button from "../../components/button";
-import {getAllActiveTasks, getAllCompletedTasks, getUnusedTasks} from "../../redux/tasks/tasksSelectors";
+import {
+	getActiveTodayTasks,
+	getActiveTomorrowTasks,
+	getAllCompletedTasks,
+	getUnusedTasks
+} from "../../redux/tasks/tasksSelectors";
 import {FaPlus} from "react-icons/fa";
 
 const Dashboard = () => {
+	const [doneIsShown, setDoneIsShown] = useState(false);
 	const [isCreateFormShow, setIsCreateFormShow] = useState(true);
-	const tasksActive = useSelector(getAllActiveTasks);
+	const tasksActiveToday = useSelector(getActiveTodayTasks);
+	const tasksActiveTomorrow = useSelector(getActiveTomorrowTasks);
+	
 	const completedTasks = useSelector(getAllCompletedTasks);
-	const unusedTasks = useSelector(getUnusedTasks);
+	const unUsedTasks = useSelector(getUnusedTasks);
+	
+	const getSorted = list => {
+		return list.sort((a, b) => {
+			const dateA = new Date(a.taskDate);
+			const dateB = new Date(b.taskDate);
+			if (dateA < dateB) {
+				return -1;
+			}
+			if (dateA > dateB) {
+				return 1;
+			}
+			
+			return 0;
+		});
+	};
+	
+	const todayCards = [...getSorted(tasksActiveToday)];
 	
 	
 	return (
 		<DashBoardContainer>
 			<Container>
-				<h2>Today</h2>
-				<section className="today">
-					<CardList isVisible={true} tasks={tasksActive} onCloseModal={() => setIsCreateFormShow(false)}
+				<section className="today-section">
+					<h3 className="dashboard-title">Today</h3>
+					<CardList isVisible={true} tasks={todayCards} onCloseModal={() => setIsCreateFormShow(false)}
 							  isCreateFormShow={isCreateFormShow}/>
 				</section>
 				<section>
-					<h2>Time is over</h2>
-					<CardList tasks={unusedTasks}/>
+					<h3 className="dashboard-title">Time is over</h3>
+					<CardList tasks={getSorted(unUsedTasks)}/>
 				</section>
 				<section>
-					<h2>Tomorrow</h2>
+					<h3 className="dashboard-title">Tomorrow</h3>
+					<CardList tasks={getSorted(tasksActiveTomorrow)}/>
 				</section>
-				<section className="done">
-					<h2>Done</h2>
-					<CardList tasks={completedTasks}/>
+				<section className="done-section">
+					<div className="wrapper-done">
+						<Button className={doneIsShown ? "active" : ""} onClick={() => setDoneIsShown(!doneIsShown)}>
+							Done
+						</Button>
+					</div>
+					{doneIsShown && <CardList tasks={completedTasks}/>}
 				</section>
 				<div className="add-task-button">
 					<Button type="button" onClick={() => setIsCreateFormShow(true)}>
