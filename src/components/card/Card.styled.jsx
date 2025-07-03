@@ -38,7 +38,7 @@ export const CardContainer = styled.div`
     
     
     border-radius: 15px;
-    cursor: pointer;
+    cursor: ${props => (props.completed ? 'not-allowed' : 'pointer')};
     box-shadow: -1px 1px 3px 4px rgba(0, 0, 0, 0.25);
     transition: all 300ms ease-in-out;
     
@@ -58,30 +58,15 @@ export const CardContainer = styled.div`
             color: ${({theme}) => theme.colors.gray};
         }
     }
+	
+	.recover-tas-btn {
+		font-size: 14px;
+		transition: all 0.25s ease-in-out;
+		&:hover {
+			color: ${({theme}) => theme.colors.secondary};
+		}
+	}
 `;
-
-// export const ChoiceCategory = styled.div`
-//     select {
-//         position: relative;
-//         width: 110px;
-//         height: 35px;
-//         padding-left: 15px;
-//         margin-left: -15px;
-//         display: flex;
-//         align-items: center;
-//
-//         font-size: 14px;
-//         font-weight: 400;
-//         text-transform: uppercase;
-//
-//         background: #D3F6CE;
-//         border-top-right-radius: 50px;
-//         border-bottom-right-radius: 50px;
-//         border: none;
-//         outline: none;
-//         cursor: pointer;
-//     }
-// `;
 
 export const CardHeader = styled.div`
     display: flex;

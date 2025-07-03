@@ -9,7 +9,7 @@ const Card = ({task}) => {
 	
 	return (
 		<>
-			{isUpdateCard ? (
+			{isUpdateCard && !completed ? (
 				<CreateEditCard
 					difficultyProp={difficulty}
 					categoryProp={category}
@@ -17,7 +17,6 @@ const Card = ({task}) => {
 					taskDate={taskDate}
 					id={_id}
 					isCompleted={completed}
-					
 					isUpdateCard={isUpdateCard}
 					handleHideCard={() => setIsUpdateCard(false)}
 				

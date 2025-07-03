@@ -25,8 +25,8 @@ const CreateEditCard = ({
 							textPropName = "",
 							id = null,
 							isCompleted = false,
-							taskDate,
 							handleHideCard,
+							taskDate,
 							isUpdateCard,
 							isDeleteCreatingTask,
 							
@@ -40,9 +40,8 @@ const CreateEditCard = ({
 	const [date, setDate] = useState(new Date());
 	const [isShowModal, setIsShowModal] = useState(false);
 	const nodeRef = useRef(null);
-	// console.log("TASK", task);
+	
 	const handleChangeCardForm = (e) => {
-		// console.log("e", e.target.value)
 		const {value, name} = e.target;
 		
 		switch (name) {
@@ -74,18 +73,16 @@ const CreateEditCard = ({
 		dispatch(tasksOperations.createTask(dataTask));
 		
 		setTaskName("");
-		// setCategory("stuff");
-		// setDifficulty("normal");
 	}
 	const onHandleUpdateTask = (event) => {
-		console.log("e", event);
-		event.stopPropagation();
+		// console.log("e", event);
+		// event.stopPropagation();
 		
 		const updateDataTask = {
 			difficulty,
 			category,
 			taskName: taskName,
-			taskDate: date,
+			taskDate: taskDate,
 			id: id
 		}
 		

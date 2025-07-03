@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const DashBoardContainer = styled.div`
     padding-top: 20px;
     background-color: #f2f3f7;
-    
+    flex: 1;
     
     h3.dashboard-title {
         margin-bottom: 15px;
@@ -74,7 +74,6 @@ export const DashBoardContainer = styled.div`
             position: relative;
             left: -75px;
             top: -12px;
-                //color: ${({theme}) => theme.colors.gray};
             text-transform: uppercase;
             
             

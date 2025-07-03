@@ -4,6 +4,7 @@ import {CardContainer} from "../card/Card.styled";
 import {ReactComponent as Fire} from "../../images/fire.svg";
 import {ReactComponent as Star} from "../../images/star_blue.svg";
 import tasksOperations from "../../redux/tasks/tasksOperations";
+import Button from "../button";
 
 const StaticCard = ({textPropName, difficultyProp, taskDate, categoryProp, onClick, id, isCompleted, ref}) => {
 	const dispatch = useDispatch();
@@ -24,21 +25,21 @@ const StaticCard = ({textPropName, difficultyProp, taskDate, categoryProp, onCli
 		Date.parse(taskDate) - Date.now() <= 3600000 &&
 		Date.parse(taskDate) - Date.now() > 0;
 	
-	
-	console.log("NEW DATE", new Date());
-	console.log("DATE NOW", Date.parse(taskDate));
-	
-	
-	
-	const onHandleUpdateStatusTask = (id) => {
+	const onHandleUpdateStatusTask = (ID) => {
+		if (isCompleted) return;
+		
 		dispatch(tasksOperations.updateStatusTask({
-			completed: !isCompleted,
-			id
+			completed: true,
+			id: ID
 		}));
 	}
 	
+	const onRecoverTask = () => {
+		dispatch(tasksOperations.updateStatusTask({id: id, completed: false}))
+	}
+	
 	return (
-		<CardContainer onClick={onClick} className="static-card" ref={ref}>
+		<CardContainer onClick={onClick} className="static-card" ref={ref} completed={isCompleted}>
 			<CardHeaderStyle>
 				<div>
 					<span className={difficultyProp}></span>
@@ -54,6 +55,7 @@ const StaticCard = ({textPropName, difficultyProp, taskDate, categoryProp, onCli
 				</div>
 			</div>
 			<CategoryContainer className={categoryProp}>{categoryProp}</CategoryContainer>
+			{isCompleted && <Button onClick={onRecoverTask} className="recover-tas-btn">Recover task</Button>}
 		</CardContainer>
 	)
 }
