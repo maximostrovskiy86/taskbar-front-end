@@ -1,20 +1,35 @@
 import styled from "styled-components";
 
 export const DashBoardContainer = styled.div`
-   padding-top: 20px;
-	
-    h2 {
-		margin-bottom: 20px;
-		text-transform: uppercase;
-		font-weight: 300;
-	}
-	
-	.add-task-button {
+    padding-top: 20px;
+    background-color: #f2f3f7;
+    flex: 1;
+    
+    h3.dashboard-title {
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        font-weight: 400;
+        
+        @media screen and (max-width: 767px) {
+            text-align: center;
+        }
+    }
+    
+    section {
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+    
+    .today-section {
+        padding-top: 0;
+    }
+    
+    .add-task-button {
         position: fixed;
         bottom: 20px;
         right: 20px;
-		
-		button {
+        
+        button {
             width: 52px;
             height: 52px;
             
@@ -33,6 +48,49 @@ export const DashBoardContainer = styled.div`
             &:hover {
                 transform: scale(1.05);
             }
-		}
+        }
+    }
+    
+    .wrapper-done {
+        position: relative;
+        margin-left: 70px;
+        
+        &:before {
+            content: "";
+            width: 100%;
+            height: 1px;
+            position: absolute;
+            background-image: linear-gradient(
+                    to right,
+                    transparent 40%,
+                    #63B8E3FF 40%
+            );
+            background-repeat: repeat-x;
+            background-position: 50% 100%;
+            background-size: 20px 100%;
+        }
+        
+        button {
+            position: relative;
+            left: -75px;
+            top: -12px;
+            text-transform: uppercase;
+            
+            
+            &:after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                right: -8px;
+                border: 6px solid transparent;
+                border-top: 6px solid ${({theme}) => theme.colors.secondary};
+            }
+            
+            &.active::after {
+                top: 5px;
+                transform: rotate(180deg);
+                transition: transform 350ms cubic-bezier(0.4, 0, 0.2, 1);
+            }
+        }
     }
 `;

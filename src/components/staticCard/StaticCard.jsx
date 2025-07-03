@@ -1,41 +1,62 @@
 import {useDispatch} from 'react-redux';
-import {StaticCardContainer, CategoryContainer, CardHeaderStyle} from "./StaticCard.styled";
+import {CategoryContainer, CardHeaderStyle} from "./StaticCard.styled";
 import {CardContainer} from "../card/Card.styled";
 import {ReactComponent as Fire} from "../../images/fire.svg";
 import {ReactComponent as Star} from "../../images/star_blue.svg";
 import tasksOperations from "../../redux/tasks/tasksOperations";
-import Animate from "../animate/Animate";
-import {useRef} from "react";
+import Button from "../button";
 
 const StaticCard = ({textPropName, difficultyProp, taskDate, categoryProp, onClick, id, isCompleted, ref}) => {
 	const dispatch = useDispatch();
 	
+	const optionsTime = {hour12: false, hour: "numeric", minute: "numeric"};
+	const date = new Date(taskDate).toLocaleTimeString("en-US", optionsTime);
+	let time;
 	
-	const onHandleUpdateStatusTask = (id) => {
+	if (
+		new Date().toLocaleDateString() === new Date(taskDate).toLocaleDateString()
+	) {
+		time = `Today, ${date}`;
+	} else  {
+		time = `Tomorrow, ${date}`;
+	}
+	
+	const isFireShow =
+		Date.parse(taskDate) - Date.now() <= 3600000 &&
+		Date.parse(taskDate) - Date.now() > 0;
+	
+	const onHandleUpdateStatusTask = (ID) => {
+		if (isCompleted) return;
+		
 		dispatch(tasksOperations.updateStatusTask({
-			completed: !isCompleted,
-			id
+			completed: true,
+			id: ID
 		}));
 	}
 	
+	const onRecoverTask = () => {
+		dispatch(tasksOperations.updateStatusTask({id: id, completed: false}))
+	}
+	
 	return (
-			<CardContainer onClick={onClick} className="static-card" ref={ref}>
-				<CardHeaderStyle>
-					<div>
-						<span className={difficultyProp}></span>
-						<span>{difficultyProp}</span>
-					</div>
-					<div className="star-static-card"><Star onClick={() => onHandleUpdateStatusTask(id)}/></div>
-				</CardHeaderStyle>
-				<div className="main-card">
-					<h3 className="title-task">{textPropName}</h3>
-					<div>
-						<span className="date">{taskDate}</span>
-						<Fire/>
-					</div>
+		<CardContainer onClick={onClick} className="static-card" ref={ref} completed={isCompleted}>
+			<CardHeaderStyle>
+				<div>
+					<span className={difficultyProp}></span>
+					<span>{difficultyProp}</span>
 				</div>
-				<CategoryContainer className={categoryProp}>{categoryProp}</CategoryContainer>
-			</CardContainer>
+				<div className="star-static-card"><Star onClick={() => onHandleUpdateStatusTask(id)}/></div>
+			</CardHeaderStyle>
+			<div className="main-card">
+				<h3 className="title-task">{textPropName}</h3>
+				<div>
+					<span className="date">{time}</span>
+					{isFireShow && <Fire/>}
+				</div>
+			</div>
+			<CategoryContainer className={categoryProp}>{categoryProp}</CategoryContainer>
+			{isCompleted && <Button onClick={onRecoverTask} className="recover-tas-btn">Recover task</Button>}
+		</CardContainer>
 	)
 }
 

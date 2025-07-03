@@ -1,6 +1,5 @@
 export const theme = {
 	colors: {
-		background: '#242A37',
 		primary: '#242A37',
 		secondary: '#00D7FF',
 		accent: '#15395A',
@@ -14,7 +13,7 @@ export const theme = {
 	media: {
 		extraLarge: '(max-width: 1140px)',
 		large: '(max-width: 960px)',
-		medium: '(max-width: 720px)',
+		medium: '(max-width: 767px)',
 		small: '(max-width: 540px)',
 	},
 	durations: {

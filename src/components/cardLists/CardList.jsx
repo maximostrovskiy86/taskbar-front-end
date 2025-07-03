@@ -1,16 +1,11 @@
 import {CardListContainer} from "./CarsList.styled";
 import Card from "../card";
 import CreateEditCard from "../createdEditCard";
-import {useState} from "react";
 
-
-const CardList = ({isCreateFormShow = false, tasks, onCloseModal}) => {
-	// console.log("TASKCARDLIST", tasks);
-	const [isAnimate, setIsAnimate] = useState(false);
-	
+const CardList = ({isCreateFormShow = false, tasks, onCloseModal, isVisible = false}) => {
 	return (
 		<CardListContainer>
-			{isCreateFormShow && (
+			{isCreateFormShow && isVisible && (
 				<li className="card-list-item">
 					<CreateEditCard isDeleteCreatingTask={onCloseModal}/>
 				</li>
@@ -18,9 +13,9 @@ const CardList = ({isCreateFormShow = false, tasks, onCloseModal}) => {
 			
 			{tasks && tasks.map((task) => {
 				return <li className="card-list-item" key={task.id}>
-					<Card task={task} isAnimate={isAnimate} setIsAnimate={setIsAnimate}/>
+					<Card task={task}/>
 				</li>
-			}).reverse()
+			})
 			}
 		</CardListContainer>
 	)
