@@ -16,6 +16,7 @@ const transitionStyle = css`
 
 export const CreateEditContainer = styled(CardContainer)`
     position: relative;
+    background-color: ${({theme}) => theme.colors.white};
 `;
 
 export const CreateEditHeaderCardContainer = styled(CardHeader)`
@@ -59,17 +60,17 @@ export const ConfirmedCreateDeleteTask = styled.div`
         opacity: 0;
         transform: scale(0.9);
     }
-
+    
     .modal-delete-enter-active {
         opacity: 1;
         transform: translateX(0);
         transition: opacity 300ms, transform 300ms;
     }
-
+    
     .modal-delete-exit {
         opacity: 1;
     }
-
+    
     .modal-delete-exit-active {
         opacity: 0;
         transform: scale(0.9);
@@ -95,6 +96,7 @@ export const ConfirmedCreateDeleteTask = styled.div`
         font-size: ${({theme}) => theme.fontSizes.md};;
         color: ${({theme}) => theme.colors.secondary};
         ${transitionStyle};
+        
         &:hover {
             color: ${({theme}) => theme.colors.gray};
         }
@@ -113,7 +115,7 @@ export const ConfirmedCreateDeleteTask = styled.div`
     .popUp-button-container {
         margin-top: 10px;
         display: flex;
-   
+        
         
         button {
             font-size: ${({theme}) => theme.fontSizes.sm};
@@ -123,6 +125,7 @@ export const ConfirmedCreateDeleteTask = styled.div`
         
         button:first-of-type {
             color: ${({theme}) => theme.colors.green};
+            
             &:hover {
                 color: ${({theme}) => theme.colors.gray};
             }
@@ -131,6 +134,7 @@ export const ConfirmedCreateDeleteTask = styled.div`
         button:last-of-type {
             position: relative;
             color: ${({theme}) => theme.colors.red};
+            
             &:hover {
                 color: ${({theme}) => theme.colors.gray};
             }
@@ -144,7 +148,6 @@ export const ConfirmedCreateDeleteTask = styled.div`
         }
     }
 `;
-
 
 export const FooterEditCardContainer = styled.div`
     display: flex;
