@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const DashBoardContainer = styled.div`
     padding-top: 20px;
+    background-color: #f2f3f7;
+    
     
     h3.dashboard-title {
         margin-bottom: 15px;

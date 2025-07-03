@@ -6,7 +6,6 @@ import {useState} from "react";
 const Card = ({task}) => {
 	const [isUpdateCard, setIsUpdateCard] = useState(false);
 	const {difficulty, category, taskName, taskDate, _id, completed} = task;
-	console.log("TASK", task)
 	
 	return (
 		<>
@@ -30,11 +29,8 @@ const Card = ({task}) => {
 					textPropName={taskName}
 					taskDate={taskDate}
 					isCompleted={completed}
-					
 					id={_id}
-					
 					onClick={() => {
-						console.log("TRUE", true)
 						setIsUpdateCard(true)
 					}}
 				/>

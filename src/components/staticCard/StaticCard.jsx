@@ -16,17 +16,8 @@ const StaticCard = ({textPropName, difficultyProp, taskDate, categoryProp, onCli
 		new Date().toLocaleDateString() === new Date(taskDate).toLocaleDateString()
 	) {
 		time = `Today, ${date}`;
-	} else if (new Date().getDate() + 1 === new Date(taskDate).getDate()) {
+	} else  {
 		time = `Tomorrow, ${date}`;
-	} else {
-		time = new Date(taskDate).toLocaleTimeString("en-US", {
-			year: "numeric",
-			month: "long",
-			day: "numeric",
-			hour12: false,
-			hour: "numeric",
-			minute: "numeric",
-		});
 	}
 	
 	const isFireShow =

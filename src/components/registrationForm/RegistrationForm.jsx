@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {RegistrationLoginFormContainer, LoginInputBox} from "./RegistrationForm.styled";
 import {useDispatch} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {toast} from 'react-toastify';
 import Button from "../button";
 import authOperations from "../../redux/auth/authOperations";
@@ -106,6 +106,7 @@ const RegistrationForm = () => {
 				/>
 				<label htmlFor="password">Password</label>
 			</LoginInputBox>
+			<p>You have an account! You can <strong><Link to="/login">Sign In</Link></strong></p>
 			<Button>Go!</Button>
 		</RegistrationLoginFormContainer>
 	)

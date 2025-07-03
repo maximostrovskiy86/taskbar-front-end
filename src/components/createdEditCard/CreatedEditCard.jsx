@@ -96,20 +96,16 @@ const CreateEditCard = ({
 		
 		dispatch(tasksOperations.updateTask(updateDataTask));
 		handleHideCard(false);
-		
-		// setTitle("");
 	}
 	
 	const onHandleDeleteTask = (id) => {
 		
 		if (!isUpdateCard) {
-			// console.log("-----", "IN")
 			setIsShowModal(false);
 			isDeleteCreatingTask(false);
 			return;
 		}
 		
-		// console.log("-----", "after")
 		dispatch(tasksOperations.deleteTask(id));
 		setIsShowModal(false);
 	}

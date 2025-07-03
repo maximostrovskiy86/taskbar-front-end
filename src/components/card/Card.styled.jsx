@@ -34,6 +34,8 @@ export const CardContainer = styled.div`
     justify-content: space-between;
     
     color: ${({theme}) => theme.colors.text};
+	background-color: ${({theme}) => theme.colors.white};
+    
     
     border-radius: 15px;
     cursor: pointer;
