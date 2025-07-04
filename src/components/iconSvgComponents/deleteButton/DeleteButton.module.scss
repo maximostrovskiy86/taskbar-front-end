@@ -1,8 +1,8 @@
 @import "../../../styles/utils/variables";
 
 .deleteButton {
-    transition: fill 250ms $timing-function;
-    &:hover {
-        fill: $ticker-color-down;
-    }
+  transition: fill 250ms $timing-function;
+  &:hover {
+    fill: $ticker-color-down;
+  }
 }

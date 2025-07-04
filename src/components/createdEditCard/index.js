@@ -1,1 +1,1 @@
-export {default} from "./CreatedEditCard";
+export { default } from "./CreatedEditCard";
