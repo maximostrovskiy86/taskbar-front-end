@@ -7,7 +7,7 @@ import Button from "../../components/button";
 import {
 	getActiveTodayTasks,
 	getActiveTomorrowTasks,
-	getAllCompletedTasks,
+	getAllCompletedTasks, getChallengeTasks,
 	getUnusedTasks
 } from "../../redux/tasks/tasksSelectors";
 import {FaPlus} from "react-icons/fa";
@@ -17,6 +17,7 @@ const Dashboard = () => {
 	const [isCreateFormShow, setIsCreateFormShow] = useState(true);
 	const tasksActiveToday = useSelector(getActiveTodayTasks);
 	const tasksActiveTomorrow = useSelector(getActiveTomorrowTasks);
+	const challengeActiveTasks = useSelector(getChallengeTasks);
 	
 	const completedTasks = useSelector(getAllCompletedTasks);
 	const unUsedTasks = useSelector(getUnusedTasks);
@@ -35,16 +36,15 @@ const Dashboard = () => {
 			return 0;
 		});
 	};
-	
-	const todayCards = [...getSorted(tasksActiveToday)];
-	
+
+	const todayTasks = [...getSorted(tasksActiveToday), ...getSorted(challengeActiveTasks)];
 	
 	return (
 		<DashBoardContainer>
 			<Container>
 				<section className="today-section">
 					<h3 className="dashboard-title">Today</h3>
-					<CardList isVisible={true} tasks={todayCards} onCloseModal={() => setIsCreateFormShow(false)}
+					<CardList isVisible={true} tasks={todayTasks} onCloseModal={() => setIsCreateFormShow(false)}
 							  isCreateFormShow={isCreateFormShow}/>
 				</section>
 				<section>

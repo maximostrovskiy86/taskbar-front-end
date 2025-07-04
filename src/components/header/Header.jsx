@@ -6,7 +6,7 @@ import {RiLogoutCircleRLine} from "react-icons/ri";
 import Button from "../button";
 import Container from "../container";
 import authOperations from "../../redux/auth/authOperations";
-import {getIsLoggedIn, getUserName} from "../../redux/auth/authSelectors";
+import {getUserName} from "../../redux/auth/authSelectors";
 import {useMediaPredicate} from "react-media-hook";
 
 

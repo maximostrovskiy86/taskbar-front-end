@@ -53,10 +53,10 @@ const createTask = createAsyncThunk('tasks/addTask',
 const updateTask = createAsyncThunk('tasks/updateTask',
 	async (credentials, thunkAPI) => {
 		const {id} = credentials;
-		const {category, difficulty, taskDate, taskName} = credentials;
+		const {category, difficulty, taskDate, taskName, isChallenge} = credentials;
 		try {
 			
-			const response = await axios.put(`/tasks/${id}`, {category, difficulty, taskDate, taskName});
+			const response = await axios.put(`/tasks/${id}`, {category, difficulty, taskDate, taskName, isChallenge});
 			console.log("response", response);
 			
 			return response;

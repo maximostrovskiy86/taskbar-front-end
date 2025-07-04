@@ -32,13 +32,13 @@ export const CardContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
-    color: ${({theme}) => theme.colors.text};
-	background-color: ${({theme}) => theme.colors.white};
+	
+	color:  ${props => props.$isChallenge ? props.theme.colors.secondary : props.theme.colors.text};
+    background-color: ${props => props.$isChallenge ? "#15395a" : "#ffffff"};
     
     
     border-radius: 15px;
-    cursor: ${props => (props.completed ? 'not-allowed' : 'pointer')};
+    cursor: ${props => (props.$isCompleted ? 'default' : 'pointer')};
     box-shadow: -1px 1px 3px 4px rgba(0, 0, 0, 0.25);
     transition: all 300ms ease-in-out;
     
@@ -48,22 +48,39 @@ export const CardContainer = styled.div`
     }
     
     .main-card {
-        font-size: 20px;
-        font-weight: 700;
+        font-size: 18px;
+        font-weight: 400;
         text-align: center;
+		color: ${({theme}) => theme.colors.secondary};
         
         .date {
             padding-right: 7px;
             font-size: 14px;
-            color: ${({theme}) => theme.colors.gray};
+        }
+		
+		h5 {
+			margin-bottom: 15px;
+			font-weight: 400;
+		}
+		
+		h3 {
+            font-weight: 400;
+            color: ${props => props.$isChallenge ? props.theme.colors.white : props.theme.colors.text};
+            
         }
     }
 	
-	.recover-tas-btn {
+	.recover-task-btn {
+        width: fit-content;
+		margin: 0 auto;
+		align-items: baseline;
 		font-size: 14px;
 		transition: all 0.25s ease-in-out;
-		&:hover {
+        color: ${({theme}) => theme.colors.gray};
+        
+        &:hover {
 			color: ${({theme}) => theme.colors.secondary};
+			transform: scale(1.05);
 		}
 	}
 `;

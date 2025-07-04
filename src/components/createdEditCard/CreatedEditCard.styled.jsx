@@ -16,11 +16,14 @@ const transitionStyle = css`
 
 export const CreateEditContainer = styled(CardContainer)`
     position: relative;
-    background-color: ${({theme}) => theme.colors.white};
+    background-color: ${props => props.$isChallenge ? "#15395a" : "#ffffff"};
+    
+    .datePicker {
+        background-color: transparent;
+    }
 `;
 
-export const CreateEditHeaderCardContainer = styled(CardHeader)`
-    
+export const CreateEditHeaderCardContainer = styled(CardHeader)`Д
     .color-selected-level {
         display: inline-block;
         width: 12px;
@@ -41,10 +44,13 @@ export const CardInput = styled.div`
         border: none;
         outline: none;
         border-bottom: 1px solid ${({theme}) => theme.colors.secondary};
-        caret-color: ${({theme}) => theme.colors.secondary};:;
+        caret-color: ${({theme}) => theme.colors.secondary};
+        color: ${({theme}) => theme.colors.secondary};;
+        background-color: transparent;
     }
     
     label {
+        margin-bottom: 10px;
         font-weight: ${props => props.theme.fontWeights.normal};
         text-transform: uppercase;
         font-size: ${props => props.theme.fontSizes.sm};
@@ -109,7 +115,7 @@ export const ConfirmedCreateDeleteTask = styled.div`
     h4.popUp-title {
         font-weight: ${({theme}) => theme.fontWeights.normal};
         font-size: ${({theme}) => theme.fontSizes.md};
-        
+        color: ${({theme}) => theme.colors.text};
     }
     
     .popUp-button-container {

@@ -3,6 +3,9 @@ import Card from "../card";
 import CreateEditCard from "../createdEditCard";
 
 const CardList = ({isCreateFormShow = false, tasks, onCloseModal, isVisible = false}) => {
+	
+	console.log("tasks", tasks);
+	
 	return (
 		<CardListContainer>
 			{isCreateFormShow && isVisible && (
@@ -11,8 +14,9 @@ const CardList = ({isCreateFormShow = false, tasks, onCloseModal, isVisible = fa
 				</li>
 			)}
 			
-			{tasks && tasks.map((task) => {
-				return <li className="card-list-item" key={task.id}>
+			{tasks.length > 0 && tasks.map((task) => {
+				// console.log("task", task);
+				return <li className="card-list-item" key={task._id || task.id}>
 					<Card task={task}/>
 				</li>
 			})

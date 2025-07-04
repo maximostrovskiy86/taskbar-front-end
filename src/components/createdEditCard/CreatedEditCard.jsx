@@ -12,11 +12,15 @@ import {ReactComponent as Star} from "../../images/star_blue.svg";
 import {ReactComponent as DeleteTask} from "../../images/cancele-cross.svg";
 import {ReactComponent as DoneTask} from "../../images/done.svg";
 import {ReactComponent as UpdateTask} from "../../images/save.svg";
+import {ReactComponent as Cup} from "../../images/trophy.svg";
 import tasksOperations from "../../redux/tasks/tasksOperations"
 import Button from "../button";
 import PopUpConfirmCreateTask from "../popUpConfirmCreateTask";
 import Animate from "../animate/Animate";
 import {toast} from "react-toastify";
+import moment from "moment";
+
+const ADDITIONAL_TIME = 60000;
 
 
 const CreateEditCard = ({
@@ -26,20 +30,21 @@ const CreateEditCard = ({
 							id = null,
 							isCompleted = false,
 							handleHideCard,
-							taskDate,
+							deadlineProp = new Date(),
 							isUpdateCard,
 							isDeleteCreatingTask,
 							
 						}) => {
-	const dispatch = useDispatch();
-	
+	const [isChallenge, setChallenge] = useState(false);
 	const [category, setCategory] = useState(categoryProp);
 	const [difficulty, setDifficulty] = useState(difficultyProp);
 	const [taskName, setTaskName] = useState(textPropName);
 	
-	const [date, setDate] = useState(new Date());
+	const [date, setDate] = useState(deadlineProp);
 	const [isShowModal, setIsShowModal] = useState(false);
 	const nodeRef = useRef(null);
+	const dispatch = useDispatch();
+	
 	
 	const handleChangeCardForm = (e) => {
 		const {value, name} = e.target;
@@ -55,17 +60,16 @@ const CreateEditCard = ({
 	
 	const handleError = () => toast.error("Enter a task title, please");
 	
-	const onHandleCreateTask = (e) => {
-		console.log("e", e)
-		
+	const onHandleCreateTask = () => {
 		const dataTask = {
+			isChallenge,
 			difficulty,
 			category,
 			taskName: taskName,
-			taskDate: date,
+			taskDate: moment(date).format("YYYY-MM-DD HH:mm"),
 		}
 		
-		if (taskName === "") {
+		if (taskName.trim() === "") {
 			handleError();
 			return;
 		}
@@ -75,18 +79,23 @@ const CreateEditCard = ({
 		setTaskName("");
 	}
 	const onHandleUpdateTask = (event) => {
-		// console.log("e", event);
 		// event.stopPropagation();
+		let updateDate = date;
+		
+		if (new Date() >= new Date(date)) {
+			updateDate = new Date(new Date().getTime() + ADDITIONAL_TIME);
+		}
 		
 		const updateDataTask = {
+			isChallenge,
 			difficulty,
 			category,
 			taskName: taskName,
-			taskDate: taskDate,
+			taskDate: moment(updateDate).format("YYYY-MM-DD HH:mm"),
 			id: id
 		}
 		
-		if (taskName === "") {
+		if (taskName.trim() === "") {
 			handleError();
 			return;
 		}
@@ -114,21 +123,25 @@ const CreateEditCard = ({
 		}));
 	}
 	
+	const onHandleChangeTaskOnChallenge = () => {
+		setChallenge(!isChallenge);
+	}
+	
 	return (
 		<>
-			<CreateEditContainer className="create-edit-card">
+			<CreateEditContainer className="create-edit-card" $isChallenge={isChallenge}>
 				<CreateEditHeaderCardContainer>
 					<OptionsPicker getOptionValue={setDifficulty} initialValue={difficulty} type='level'/>
-					<Star/>
+					<div onClick={onHandleChangeTaskOnChallenge}>{isChallenge ? <Cup/> : <Star />}</div>
 				</CreateEditHeaderCardContainer>
 				<div className="create-edit-input-box">
 					<CardInput>
-						<label htmlFor="enter-title">Create a new quest</label>
-						<input type="text" id="enter-title" name="title" required minLength="3" autoFocus
+						<label htmlFor="enter-title">{isChallenge ? 'Create a new challenge' : 'Create a new quest'}</label>
+						<input type="text" id="enter-title" name="title" required minLength="3" maxLength="30" autoFocus
 							   value={taskName}
 							   onChange={handleChangeCardForm}/>
 					</CardInput>
-					<DateCalendar selectDate={setDate} elemDate={date} className="date-picker-calendar"/>
+					<DateCalendar selectDate={setDate} elemDate={date} className="task-calendar"/>
 				</div>
 				<FooterEditCardContainer>
 					<OptionsPicker getOptionValue={setCategory} initialValue={category} type="category"/>
