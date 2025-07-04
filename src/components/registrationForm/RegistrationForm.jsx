@@ -10,9 +10,9 @@ import Button from "../button";
 import authOperations from "../../redux/auth/authOperations";
 
 const RegistrationForm = () => {
-  const [userName, setUserName] = useState("Derek");
-  const [email, setEmail] = useState("car@car.com");
-  const [password, setPassword] = useState("2wsx@WSX");
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
