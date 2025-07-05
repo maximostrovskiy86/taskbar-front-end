@@ -25,6 +25,7 @@ import PropTypes from "prop-types";
 const ADDITIONAL_TIME = 60000;
 
 const CreateEditCard = ({
+  isChallengeProp = false,
   difficultyProp = "normal",
   categoryProp = "stuff",
   textPropName = "",
@@ -35,7 +36,7 @@ const CreateEditCard = ({
   isUpdateCard,
   isDeleteCreatingTask,
 }) => {
-  const [isChallenge, setChallenge] = useState(false);
+  const [isChallenge, setChallenge] = useState(isChallengeProp);
   const [category, setCategory] = useState(categoryProp);
   const [difficulty, setDifficulty] = useState(difficultyProp);
   const [taskName, setTaskName] = useState(textPropName);
@@ -76,6 +77,7 @@ const CreateEditCard = ({
     dispatch(tasksOperations.createTask(dataTask));
 
     setTaskName("");
+    isDeleteCreatingTask(false);
   };
   const onHandleUpdateTask = (event) => {
     // event.stopPropagation();
@@ -233,13 +235,14 @@ const CreateEditCard = ({
 export default CreateEditCard;
 
 CreateEditCard.propTypes = {
+  isChallengeProp: PropTypes.bool,
   difficultyProp: PropTypes.string,
   categoryProp: PropTypes.string,
   textPropName: PropTypes.string,
   id: PropTypes.string,
   isCompleted: PropTypes.bool,
-  handleHideCard: PropTypes.func.isRequired,
+  handleHideCard: PropTypes.func,
   deadlineProp: PropTypes.string,
-  isUpdateCard: PropTypes.bool.isRequired,
+  isUpdateCard: PropTypes.bool,
   isDeleteCreatingTask: PropTypes.bool.isRequired,
 };

@@ -19,8 +19,9 @@ const CardList = ({
 
       {tasks.length > 0 &&
         tasks.map((task) => {
+          console.log("TASK", task);
           return (
-            <li className="card-list-item" key={task._id || task.id}>
+            <li className="card-list-item" key={task._id}>
               <Card task={task} />
             </li>
           );
@@ -33,7 +34,7 @@ export default CardList;
 
 CardList.propTypes = {
   isCreateFormShow: PropTypes.bool,
-  onCloseModal: PropTypes.func.isRequired,
+  onCloseModal: PropTypes.func,
   tasks: PropTypes.array.isRequired,
   isVisible: PropTypes.bool,
 };

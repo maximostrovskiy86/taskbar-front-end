@@ -12,8 +12,7 @@ import {
   getUnusedTasks,
 } from "../../redux/tasks/tasksSelectors";
 import { FaPlus } from "react-icons/fa";
-import { getIsLoading } from "../../redux/auth/authSelectors";
-import LoadingSpinner from "../../components/loadingSpinner";
+import { getIsLoadingTasks } from "../../redux/tasks/tasksSelectors";
 
 const Dashboard = () => {
   const [doneIsShown, setDoneIsShown] = useState(false);
@@ -23,7 +22,7 @@ const Dashboard = () => {
   const challengeActiveTasks = useSelector(getChallengeTasks);
   const completedTasks = useSelector(getAllCompletedTasks);
   const unUsedTasks = useSelector(getUnusedTasks);
-  const isLoading = useSelector(getIsLoading);
+  const isLoading = useSelector(getIsLoadingTasks);
 
   const getSorted = (list) => {
     return list.sort((a, b) => {
@@ -47,7 +46,7 @@ const Dashboard = () => {
 
   return (
     <DashBoardContainer>
-      {isLoading && <LoadingSpinner />}
+      {isLoading && <h2 className="loading">Loading ...</h2>}
       <Container>
         <section className="today-section">
           <h3 className="dashboard-title">Today</h3>

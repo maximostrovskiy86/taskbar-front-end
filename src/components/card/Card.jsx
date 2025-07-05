@@ -19,6 +19,7 @@ const Card = ({ task }) => {
     <>
       {isUpdateCard && !completed ? (
         <CreateEditCard
+          isChallengeProp={isChallenge}
           difficultyProp={difficulty}
           categoryProp={category}
           textPropName={taskName}
@@ -30,12 +31,12 @@ const Card = ({ task }) => {
         />
       ) : (
         <StaticCard
+          isChallenge={isChallenge}
           difficultyProp={difficulty}
           categoryProp={category}
           textPropName={taskName}
           taskDate={taskDate}
           isCompleted={completed}
-          isChallenge={isChallenge}
           id={_id}
           onClick={() => {
             setIsUpdateCard(true);

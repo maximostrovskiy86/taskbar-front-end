@@ -36,3 +36,7 @@ export const getChallengeTasks = (state) =>
       !completed &&
       new Date().getTime() <= new Date(taskDate).getTime(),
   );
+
+export const getIsLoadingTasks = (state) => {
+  return state.tasks.isLoading;
+};

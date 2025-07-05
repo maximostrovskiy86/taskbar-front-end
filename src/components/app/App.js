@@ -6,7 +6,6 @@ import Dashboard from "../../pages/dashboard/Dashboard";
 import NotFoundPage from "../../pages/notFound";
 import RegisterPage from "../../pages/registerPage";
 import LoginPage from "../../pages/loginPage";
-import LoadingSpinner from "../loadingSpinner";
 import {
   getAccessToken,
   getIsLoading,
@@ -17,7 +16,6 @@ import PublicRoute from "../routes/PublicRoute";
 import Header from "../header";
 import { useEffect } from "react";
 import tasksOperations from "../../redux/tasks/tasksOperations";
-
 // import {UserMenu} from "../UserMenu";
 
 function App() {
@@ -37,7 +35,7 @@ function App() {
     <>
       {isLoggedIn && <Header />}
       {isLoading ? (
-        <LoadingSpinner />
+        <h2 className="loading">Loading ...</h2>
       ) : (
         <main className="main">
           {/*<UserMenu/>*/}
